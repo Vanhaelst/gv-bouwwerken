@@ -27,8 +27,8 @@ export const Text = ({ as, level, classnames = "", htmlFor, children }) => {
     }
   };
 
-  const titleClass = `${getLevel()} ${classnames} font-black`;
-  const textClass = `${getLevel()} ${classnames} font-normal leading-normal`;
+  const titleClass = `${getLevel()} ${classnames}`;
+  const textClass = `${getLevel()} ${classnames} leading-normal`;
 
   const getTag = () => {
     switch (as) {

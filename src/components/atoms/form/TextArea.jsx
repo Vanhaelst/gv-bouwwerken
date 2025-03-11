@@ -32,10 +32,13 @@ export const TextArea = ({
         rows={3}
         autoComplete={autoComplete}
         className={clsx(
-          "col-start-1 row-start-1 block w-full rounded-md bg-white py-1.5 pl-3 pr-10 text-base outline outline-1 -outline-offset-1 focus:outline focus:outline-2 focus:-outline-offset-2 focus:outline-primary-600 sm:pr-9 sm:text-sm/6 resize-none",
+          "block w-full rounded-md outline outline-1 -outline-offset-1 focus:outline focus:outline-2 focus:-outline-offset-2",
+          "bg-primary-500/20 focus:outline-primary-500 ",
+          "py-3 pl-3 pr-9 md:py-5 md:pl-6 md:pr-10",
+          "sm:text-sm/6 text-base ",
           error
             ? "text-red-900 outline-red-300 placeholder:text-red-300"
-            : "text-slate-900 outline-slate-300 placeholder:text-slate-300",
+            : "text-primary-500 outline-slate-300 placeholder:text-primary-500/80",
         )}
         {...register}
       />

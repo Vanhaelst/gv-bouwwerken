@@ -38,7 +38,7 @@ export function NavigationClient({ nav, topbar, locale, permissions }) {
         topbar={topbar}
         nav={nav}
         extraNav={extraNav}
-        classnames={`${sticky ? "top-0" : "-top-28"} fixed left-0 w-full transition-all duration-300`}
+        classnames={`${sticky ? "top-0" : "-top-28"} fixed shadow-xl left-0 w-full transition-all duration-300`}
       />
     </header>
   );

@@ -1,14 +1,11 @@
-import { Geist, Geist_Mono } from "next/font/google";
+import { Red_Hat_Text } from "next/font/google";
 import "./globals.css";
-import {Navigation} from "@/components/organisms/navigation";
+import { Navigation } from "@/components/organisms/navigation";
+import Footer from "@/components/molecules/footer";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const redHatText = Red_Hat_Text({
+  variable: "--font-red_hat_text",
+  weight: ["300", "400", "500", "600", "700"],
   subsets: ["latin"],
 });
 
@@ -20,11 +17,10 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-      <Navigation />
+      <body className={`${redHatText.variable} antialiased`}>
+        <Navigation />
         {children}
+        <Footer />
       </body>
     </html>
   );

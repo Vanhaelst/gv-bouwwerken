@@ -15,7 +15,7 @@ export function Header({ nav, extraNav, classnames, sticky }) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (
-    <nav className={`${classnames} bg-white z-40 shadow-xl`}>
+    <nav className={`${classnames} bg-white z-40`}>
       <Container className="py-3 relative flex justify-between">
         <div className="flex items-center md:gap-x-12">
           <Link href="/" aria-label="Home">

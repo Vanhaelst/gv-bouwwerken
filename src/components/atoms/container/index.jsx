@@ -12,7 +12,11 @@ export function Container({ className, size, ...props }) {
 
   return (
     <div
-      className={clsx("mx-auto px-4 sm:px-6 lg:px-8", getSize(), className)}
+      className={clsx(
+        "relative mx-auto px-4 sm:px-6 lg:px-8",
+        getSize(),
+        className,
+      )}
       {...props}
     />
   );

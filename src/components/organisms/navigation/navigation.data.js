@@ -42,7 +42,7 @@ export const nav = [
   {
     id: "425",
     title: "Onze diensten",
-    href: "/diensten",
+    href: "/onze-diensten",
     children: [],
   },
   {
@@ -54,7 +54,7 @@ export const nav = [
   {
     id: "427",
     title: "Realisaties",
-    href: "/relisaties",
+    href: "/realisaties",
     children: [],
   },
   {
@@ -69,25 +69,25 @@ export const extraNav = [
   {
     id: "425",
     title: "Metselwerken",
-    href: "/diensten",
+    href: "/onze-diensten/metselwerken",
     children: [],
   },
   {
     id: "426",
     title: "Betonwerken",
-    href: "/over-ons",
+    href: "/onze-diensten/betwonwerken",
     children: [],
   },
   {
     id: "427",
     title: "Nieuwbouw",
-    href: "/relisaties",
+    href: "/onze-diensten/nieuwbouw",
     children: [],
   },
   {
     id: "429",
     title: "Renovatie",
-    href: "/contact",
+    href: "/onze-diensten/renovatie",
     children: [],
   },
   {

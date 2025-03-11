@@ -4,15 +4,14 @@ import React from "react";
 
 import { Transition } from "@headlessui/react";
 import { Text } from "@/components/atoms/text/text.component";
-import { translations } from "@/translations/general";
 
-export const ErrorMessage = ({ error, locale = "nl" }) => {
+export const ErrorMessage = ({ error }) => {
   const getErrorMessage = () => {
     switch (error) {
       case "pattern":
-        return translations.errors.general.pattern[locale];
+        return "E-mail adres niet correct";
       case "required":
-        return translations.errors.general.required[locale];
+        return "Dit veld is verplicht";
       default:
         return undefined;
     }
