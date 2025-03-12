@@ -3,9 +3,8 @@
 import { Topbar } from "./topbar";
 import { Header } from "./header";
 import { useEffect, useState } from "react";
-import { extraNav } from "@/components/organisms/navigation/navigation.data";
 
-export function NavigationClient({ nav, topbar, locale, permissions }) {
+export function NavigationClient({ nav, topbar, extraNav }) {
   const [sticky, setSticky] = useState(false);
 
   const onScroll = () => {
@@ -38,7 +37,7 @@ export function NavigationClient({ nav, topbar, locale, permissions }) {
         topbar={topbar}
         nav={nav}
         extraNav={extraNav}
-        classnames={`${sticky ? "top-0" : "-top-28"} fixed shadow-xl left-0 w-full transition-all duration-300`}
+        classnames={`${sticky ? "top-0" : "-top-40"} fixed shadow-xl left-0 w-full transition-all duration-300`}
       />
     </header>
   );

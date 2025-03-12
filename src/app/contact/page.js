@@ -1,18 +1,24 @@
 import clsx from "clsx";
 
+import { fetchData } from "@/utils/fetchData";
+import { contactQuery } from "@/queries/pages/contactPage.query";
+
 import { Hero } from "@/components/organisms/hero";
 import { Text } from "@/components/atoms/text/text.component";
 import { Container } from "@/components/atoms/container";
 import { ContactForm } from "@/components/organisms/form/contact";
 
-export default function Home() {
+async function getData() {
+  return fetchData(contactQuery());
+}
+
+export default async function Contact() {
+  const { hero, globals } = await getData();
+
+  console.log(globals);
   return (
     <main>
-      <Hero
-        size="medium"
-        title="Contact"
-        description="Wil je bouwen of verbouwen en wil je beroep doen op één van onze diensten? Neem dan snel contact met ons op voor vragen of een gratis offerte."
-      />
+      <Hero {...hero[0]} />
 
       <section>
         <Container className="grid md:grid-cols-12 my-10 md:my-24">
@@ -35,8 +41,8 @@ export default function Home() {
               level="sm"
               classnames={clsx("text-black font-medium mb-4")}
             >
-              Tiendenschuurstraat 27a
-              <br /> 2811 Leest
+              {globals.address1}
+              <br /> {globals.address2}
             </Text>
             <Text
               as="h2"
@@ -44,10 +50,10 @@ export default function Home() {
               classnames={clsx("text-black font-medium")}
             >
               <a
-                href={"mailto:glenn@bouwwerkengv.be"}
+                href={`mailto:${globals.mail}`}
                 className="hover:text-primary-500"
               >
-                glenn@bouwwerkengv.be
+                {globals.mail}
               </a>
             </Text>
             <Text
@@ -56,10 +62,10 @@ export default function Home() {
               classnames={clsx("text-black font-medium")}
             >
               <a
-                href={"mailto:0488/58.78.66"}
+                href={`tel:${globals.phone}`}
                 className="hover:text-primary-500"
               >
-                0488/58.78.66
+                {globals.phone}
               </a>
             </Text>
           </div>

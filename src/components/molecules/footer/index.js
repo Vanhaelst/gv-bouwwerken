@@ -1,12 +1,60 @@
 import { Container } from "@/components/atoms/container";
 import { Text } from "@/components/atoms/text/text.component";
 import clsx from "clsx";
+import { fetchData } from "@/utils/fetchData";
 
-const navigation = {
-  social: [
+async function getData() {
+  return fetchData(`
+    query MyQuery {     
+      companyData: globalSet(handle: "companyData") {
+        ... on companyData_GlobalSet {
+          phone
+          mail
+          address1
+          address2
+        }
+      }
+      
+      socials: globalSet(handle: "companyData") {
+        ... on companyData_GlobalSet {
+          facebook
+          instagram
+          linkedin
+        }
+      }
+      
+      nav: globalSet(handle: "navigation") {
+        ... on navigation_GlobalSet {
+          login
+          account
+          navigationitems {
+            ... on navigationitem_Entry {
+              id
+              title
+              href
+              children: navigationitems {
+                ... on navigationitem_Entry {
+                  id
+                  title
+                  href
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  `);
+}
+
+export default async function Footer() {
+  const { companyData, socials, nav } = await getData();
+  console.log(companyData, socials, nav);
+
+  const social = [
     {
       name: "Facebook",
-      href: "#",
+      href: socials.facebook,
       icon: (props) => (
         <svg fill="currentColor" viewBox="0 0 24 24" {...props}>
           <path
@@ -19,7 +67,7 @@ const navigation = {
     },
     {
       name: "Instagram",
-      href: "#",
+      href: socials.instagram,
       icon: (props) => (
         <svg fill="currentColor" viewBox="0 0 24 24" {...props}>
           <path
@@ -30,10 +78,8 @@ const navigation = {
         </svg>
       ),
     },
-  ],
-};
+  ];
 
-export default function Footer() {
   return (
     <footer className="">
       <div
@@ -46,7 +92,7 @@ export default function Footer() {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-8">
             <div className="lg:col-start-2 lg:col-span-2">
               <img
-                alt="Company name"
+                alt="Bouwwerken GV"
                 src="/logo.png"
                 className="w-24 object-contain"
               />
@@ -64,8 +110,8 @@ export default function Footer() {
                 level="sm"
                 classnames={clsx("text-black font-medium mb-4")}
               >
-                Tiendenschuurstraat 27a
-                <br /> 2811 Leest
+                {companyData.address1}
+                <br /> {companyData.address2}
               </Text>
               <Text
                 as="h2"
@@ -73,10 +119,10 @@ export default function Footer() {
                 classnames={clsx("text-black font-medium")}
               >
                 <a
-                  href={"mailto:glenn@bouwwerkengv.be"}
+                  href={`mailto:${companyData.mail}`}
                   className="hover:text-primary-500"
                 >
-                  glenn@bouwwerkengv.be
+                  {companyData.mail}
                 </a>
               </Text>
               <Text
@@ -85,10 +131,10 @@ export default function Footer() {
                 classnames={clsx("text-black font-medium")}
               >
                 <a
-                  href={"mailto:0488/58.78.66"}
+                  href={`tel:${companyData.phone}`}
                   className="hover:text-primary-500"
                 >
-                  0488/58.78.66
+                  {companyData.phone}
                 </a>
               </Text>
             </div>
@@ -101,10 +147,11 @@ export default function Footer() {
                 Volg ons
               </Text>
               <ul role="list" className="flex space-x-2">
-                {navigation.social.map((item) => (
+                {social.map((item) => (
                   <a
                     key={item.name}
                     href={item.href}
+                    target="_blank"
                     className="text-gray-600 hover:text-gray-800"
                   >
                     <span className="sr-only">{item.name}</span>
@@ -114,50 +161,20 @@ export default function Footer() {
               </ul>
             </div>
             <div className="lg:col-span-2 space-y-6">
-              <Text
-                as="h2"
-                level="sm"
-                classnames={clsx(
-                  "text-black font-light lg:text-right uppercase",
-                )}
-              >
-                <a href={"/over-ons"} className="hover:text-primary-500">
-                  Over ons
-                </a>
-              </Text>
-              <Text
-                as="h2"
-                level="sm"
-                classnames={clsx(
-                  "text-black font-light lg:text-right uppercase",
-                )}
-              >
-                <a href={"/over-ons"} className="hover:text-primary-500">
-                  Onze diensten
-                </a>
-              </Text>
-              <Text
-                as="h2"
-                level="sm"
-                classnames={clsx(
-                  "text-black font-light lg:text-right uppercase",
-                )}
-              >
-                <a href={"/over-ons"} className="hover:text-primary-500">
-                  Realisaties
-                </a>
-              </Text>
-              <Text
-                as="h2"
-                level="sm"
-                classnames={clsx(
-                  "text-black font-light lg:text-right uppercase",
-                )}
-              >
-                <a href={"/over-ons"} className="hover:text-primary-500">
-                  Contact
-                </a>
-              </Text>
+              {nav.navigationitems.map(({ id, title, href }) => (
+                <Text
+                  key={id}
+                  as="h2"
+                  level="sm"
+                  classnames={clsx(
+                    "text-black font-light lg:text-right uppercase",
+                  )}
+                >
+                  <a href={href} className="hover:text-primary-500">
+                    {title}
+                  </a>
+                </Text>
+              ))}
             </div>
           </div>
         </Container>
@@ -166,8 +183,18 @@ export default function Footer() {
         <Container className="grid grid-cols-1 lg:grid-cols-12">
           <div className="lg:col-start-2 lg:col-span-10 py-4">
             <Text classnames="text-white font-medium">
-              Copyright {new Date().getFullYear()} | Alle rechten voorbehouden |
-              Privacybeleid | Made by Publiplus
+              Copyright {new Date().getFullYear()} |{" "}
+              <a href="/privacy" className="cursor-pointer hover:underline">
+                Privacybeleid
+              </a>{" "}
+              |{" "}
+              <a
+                href="https://publiplus.be/"
+                target="_blank"
+                className="cursor-pointer hover:underline"
+              >
+                Made by Publiplus
+              </a>
             </Text>
           </div>
         </Container>

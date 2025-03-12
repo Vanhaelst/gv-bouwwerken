@@ -1,4 +1,4 @@
-export const craftUrl = "https://bb-m.pluxit.be/web/api";
+export const craftUrl = "https://gv.pluxit.be/web/api";
 
 export async function fetchData(graphql) {
   const res = await fetch(craftUrl, {

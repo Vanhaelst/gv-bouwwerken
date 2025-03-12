@@ -6,6 +6,7 @@ import { useState } from "react";
 
 function ImageWithFallback({ src, alt, width, height, objectFit, classnames }) {
   const [imageError, setImageError] = useState(false);
+
   return (
     <Image
       src={imageError ? fallback : src}

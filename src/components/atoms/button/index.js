@@ -39,8 +39,8 @@ const variantStyles = {
 };
 
 export function Button({
-  variant = "solid",
-  color = "slate",
+  variant = "outline",
+  color = "primary",
   type = "button",
   onClick,
   className,

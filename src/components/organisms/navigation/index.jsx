@@ -1,11 +1,10 @@
 import { NavigationClient } from "./navigation";
 import { fetchData } from "@/utils/fetchData";
-import {nav, topbar} from "@/components/organisms/navigation/navigation.data";
 
-async function getData({ locale }) {
+async function getData() {
   return fetchData(`
     query MyQuery {
-      topbar: globalSet(handle: "topbar", language: "${locale}") {
+      topbar: globalSet(handle: "topbar") {
         ... on topbar_GlobalSet {
           navigationitems {
             ... on navigationitem_Entry {
@@ -18,7 +17,7 @@ async function getData({ locale }) {
         }
       }
       
-      nav: globalSet(handle: "navigation", language: "${locale}") {
+      nav: globalSet(handle: "navigation") {
         ... on navigation_GlobalSet {
           login
           account
@@ -42,13 +41,14 @@ async function getData({ locale }) {
   `);
 }
 
-export async function Navigation({ locale, permissions }) {
-  // const { topbar, nav } = await getData({ locale });
+export async function Navigation() {
+  const { topbar, nav } = await getData();
 
   return (
     <NavigationClient
-      nav={nav}
-      topbar={topbar}
+      nav={nav.navigationitems}
+      topbar={topbar.navigationitems}
+      extraNav={[]}
     />
   );
 }

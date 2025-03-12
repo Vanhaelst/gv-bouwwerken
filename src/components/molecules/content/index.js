@@ -3,8 +3,16 @@ import { Text } from "@/components/atoms/text/text.component";
 import clsx from "clsx";
 import Image from "@/utils/Image";
 import { Button } from "@/components/atoms/button";
+import RichText from "@/components/atoms/text/rich-text.component";
 
-export const Content = ({ title, description, reversed, buttons = [] }) => {
+export const Content = ({
+  title,
+  description,
+  image = [],
+  reversed,
+  buttons = [],
+  children,
+}) => {
   return (
     <Container className="grid md:grid-cols-12 my-10 md:my-24">
       <div
@@ -26,9 +34,12 @@ export const Content = ({ title, description, reversed, buttons = [] }) => {
           </Text>
         )}
         {description && (
-          <Text as="p" level="md" classnames={clsx("mb-6")}>
-            {description}
-          </Text>
+          <RichText
+            text={description}
+            as="p"
+            level="md"
+            classnames={clsx("mb-6")}
+          />
         )}
         {buttons.length ? (
           <div className="space-x-3 mt-4">
@@ -40,18 +51,26 @@ export const Content = ({ title, description, reversed, buttons = [] }) => {
           </div>
         ) : null}
       </div>
-      <Image
-        src={"/test.png"}
-        width={500}
-        height={500}
-        alt={""}
-        classnames={clsx(
-          "order-1 mb-8 aspect-[9/12] object-cover",
-          reversed
-            ? "md:col-span-4 md:col-start-2 md:order-1"
-            : "md:col-span-4 md:col-start-8 md:order-2",
-        )}
-      />
+      {children ? (
+        children
+      ) : (
+        <>
+          {image[0] && (
+            <Image
+              src={image[0].url}
+              width={image[0].width}
+              height={image[0].height}
+              alt={image[0].alt || title}
+              classnames={clsx(
+                "order-1 mb-8 aspect-video md:aspect-[9/12] object-cover rounded-md",
+                reversed
+                  ? "md:col-span-4 md:col-start-2 md:order-1"
+                  : "md:col-span-4 md:col-start-8 md:order-2",
+              )}
+            />
+          )}
+        </>
+      )}
     </Container>
   );
 };

@@ -11,11 +11,11 @@ import { Container } from "@/components/atoms/container";
 import { NavLink } from "@/components/organisms/navigation/NavLink";
 import { PopoverItem } from "@/components/organisms/navigation/popover";
 
-export function Header({ nav, extraNav, classnames, sticky }) {
+export function Header({ nav, topbar, extraNav, classnames, sticky }) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (
-    <nav className={`${classnames} bg-white z-40`}>
+    <nav className={clsx(classnames, "bg-white z-40", sticky ? "" : "py-4")}>
       <Container className="py-3 relative flex justify-between">
         <div className="flex items-center md:gap-x-12">
           <Link href="/" aria-label="Home">
@@ -26,7 +26,7 @@ export function Header({ nav, extraNav, classnames, sticky }) {
               height={327}
               classnames={clsx(
                 "object-contain max-w-20",
-                sticky ? "h-20" : "w-18",
+                sticky ? "w-12" : "w-18",
               )}
             />
           </Link>
@@ -54,29 +54,34 @@ export function Header({ nav, extraNav, classnames, sticky }) {
           <button
             type="button"
             onClick={() => setMobileMenuOpen(true)}
-            className="-m-2.5 rounded-md p-2.5 text-gray-700"
+            className={clsx(
+              extraNav.length === 0 && "lg:hidden",
+              "-m-2.5 rounded-md p-2.5 text-gray-700",
+            )}
           >
             <span className="sr-only">Open main menu</span>
             <Bars3Icon aria-hidden="true" className="size-6" />
           </button>
 
           {/* Side navigation */}
+          {extraNav.length > 0 ? (
+            <div className="-mr-1">
+              <Sidebar
+                nav={extraNav}
+                mobileMenuOpen={mobileMenuOpen}
+                setMobileMenuOpen={setMobileMenuOpen}
+              />
+            </div>
+          ) : null}
+
+          {/* Mobile navigation */}
           <div className="-mr-1">
             <Sidebar
-              nav={extraNav}
+              nav={[...extraNav, ...nav, ...topbar]}
               mobileMenuOpen={mobileMenuOpen}
               setMobileMenuOpen={setMobileMenuOpen}
             />
           </div>
-
-          {/* Mobile navigation
-          <div className="-mr-1">
-            <Sidebar
-              nav={[...nav, ...topbar]}
-              mobileMenuOpen={mobileMenuOpen}
-              setMobileMenuOpen={setMobileMenuOpen}
-            />
-          </div>*/}
         </div>
       </Container>
     </nav>

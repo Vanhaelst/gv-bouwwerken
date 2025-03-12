@@ -1,3 +1,6 @@
+import { fetchData } from "@/utils/fetchData";
+import { realisationsQuery } from "@/queries/pages/realisationsPage.query";
+
 import { Hero } from "@/components/organisms/hero";
 import { Button } from "@/components/atoms/button";
 import { Container } from "@/components/atoms/container";
@@ -22,49 +25,16 @@ const buttons = [
   },
 ];
 
-const realisations = [
-  {
-    src: "/test.png",
-    alt: "/test.png",
-    width: 500,
-    height: 500,
-  },
-  {
-    src: "/test.png",
-    alt: "/test.png",
-    width: 500,
-    height: 500,
-  },
-  {
-    src: "/test.png",
-    alt: "/test.png",
-    width: 500,
-    height: 500,
-  },
-  {
-    src: "/test.png",
-    alt: "/test.png",
-    width: 500,
-    height: 500,
-  },
-  {
-    src: "/test.png",
-    alt: "/test.png",
-    width: 500,
-    height: 500,
-  },
-  {
-    src: "/test.png",
-    alt: "/test.png",
-    width: 500,
-    height: 500,
-  },
-];
+async function getData() {
+  return fetchData(realisationsQuery());
+}
 
-export default function Home() {
+export default async function Realisations() {
+  const { hero, realisations } = await getData();
+
   return (
     <main>
-      <Hero title="Realisaties" />
+      <Hero {...hero[0]} />
 
       <Container className="grid md:grid-cols-12">
         <div className="py-10 md:col-span-10 md:col-start-2 flex justify-center">

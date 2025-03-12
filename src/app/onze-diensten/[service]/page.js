@@ -45,7 +45,7 @@ const realisations = [
   },
 ];
 
-export default function Home() {
+export default function Service() {
   return (
     <main>
       <Hero title="Nieuwbouw" />
