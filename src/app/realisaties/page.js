@@ -36,8 +36,9 @@ export default async function Realisations() {
     <main>
       <Hero {...hero[0]} />
 
+      {/*
       <Container className="grid md:grid-cols-12">
-        <div className="py-10 md:col-span-10 md:col-start-2 flex justify-center">
+        <div className="pt-10 md:col-span-10 md:col-start-2 flex justify-center">
           {buttons.length ? (
             <div className="space-x-3 mt-4">
               {buttons.map((button) => (
@@ -49,6 +50,7 @@ export default async function Realisations() {
           ) : null}
         </div>
       </Container>
+      */}
 
       <RealisationsOverview realisations={realisations} />
     </main>
