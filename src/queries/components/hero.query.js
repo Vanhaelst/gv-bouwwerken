@@ -9,5 +9,6 @@ export const heroQuery = `
         size
         align
         bold
+        video
     }     
 `;
