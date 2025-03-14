@@ -28,6 +28,7 @@ export const homeQuery = () => `
       realisations: realisationsEntries(limit: 5) {
         ... on realisation_Entry {
           id
+          uri
           heading
           image: featuredImage ${imageQuery}
         }
