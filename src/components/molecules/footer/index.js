@@ -49,7 +49,6 @@ async function getData() {
 
 export default async function Footer() {
   const { companyData, socials, nav } = await getData();
-  console.log(companyData, socials, nav);
 
   const social = [
     {

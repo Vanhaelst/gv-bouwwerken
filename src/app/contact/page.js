@@ -15,7 +15,6 @@ async function getData() {
 export default async function Contact() {
   const { hero, globals } = await getData();
 
-  console.log(globals);
   return (
     <main>
       <Hero {...hero[0]} />
