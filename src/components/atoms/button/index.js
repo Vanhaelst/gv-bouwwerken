@@ -32,9 +32,9 @@ const variantStyles = {
     slate:
       "ring-slate-200 text-slate-700 hover:text-slate-900 hover:ring-slate-300 active:bg-slate-100 active:text-slate-600 focus-visible:outline-blue-600 focus-visible:ring-slate-300",
     white:
-      "ring-white text-white hover:bg-white hover:text-primary-800 active:ring-white active:text-slate-400 focus-visible:outline-white",
+      "ring-white text-white hover:bg-white hover:text-primary-800 active:ring-white active:text-slate-400 focus-visible:outline-white focus-visible:outline-blue-800 focus-visible:ring-slate-800",
     primary:
-      "ring-primary-500 text-primary-500 hover:bg-primary-500 hover:text-white active:ring-primary-500 focus-visible:outline-red-500",
+      "ring-primary-500 text-primary-500 hover:bg-primary-500 hover:text-white active:ring-primary-500 focus-visible:outline-blue-800 focus-visible:ring-slate-800",
   },
 };
 

@@ -18,7 +18,8 @@ export const RealisationsOverview = ({ realisations }) => {
             realisations.map((realisation) => {
               return (
                 <Link
-                  href={realisation.uri}
+                  key={realisation.id}
+                  href={`/${realisation.uri}`}
                   className="group relative overflow-hidden"
                 >
                   <div

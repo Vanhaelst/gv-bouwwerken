@@ -1,6 +1,7 @@
+import { SITE } from "@/enums/site";
+import { heroQuery } from "@/queries/components/hero.query";
 import { imageQuery } from "@/queries/components/image.query";
 import { buttonsQuery } from "@/queries/components/buttons.query";
-import { heroQuery } from "@/queries/components/hero.query";
 
 export const servicesQuery = () => `
     query MyQuery {
@@ -8,7 +9,7 @@ export const servicesQuery = () => `
         ... on fixedPage_Entry ${heroQuery}
       }
       
-      services: servicesEntries {
+      services: servicesEntries(sites: ["${SITE.bouwwerken}"]) {
         ... on service_Entry {
           id
           title: heading
@@ -17,7 +18,7 @@ export const servicesQuery = () => `
           buttons ${buttonsQuery}
         }
       }
-      
-      
+
+
     }
 `;

@@ -21,11 +21,11 @@ export const Hero = ({
         `bg-cover bg-no-repeat bg-center`,
         image &&
           "before:content-[''] before:absolute before:inset-0 before:block before:bg-gradient-to-b before:from-black/0 before:to-black/50 before:z-[5]",
-        size === "small"
-          ? "aspect-video md:aspect-[16/4]"
-          : size === "medium"
-            ? "aspect-video md:aspect-[16/6]"
-            : "aspect-video",
+        size === "xsmall" && "mt-20",
+        size === "small" && "aspect-video md:aspect-[16/4]",
+        size === "medium" && "aspect-video md:aspect-[16/6]",
+        size === "large" && "aspect-video",
+
         align === "left" ? "justify-start items-end" : "justify-end items-end",
       )}
     >

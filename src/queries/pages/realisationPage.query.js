@@ -8,7 +8,7 @@ export const realisationQuery = ({ slug }) => `
         ... on realisation_Entry ${heroQuery}
       }
       
-      content: realisationsEntries(limit: 5, slug: "betonwerken-nieuwbouw") {
+      content: realisationsEntries(slug: "${slug}") {
         ... on realisation_Entry {
           title: contentHeading
           description: contentDescription

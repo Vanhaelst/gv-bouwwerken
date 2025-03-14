@@ -1,17 +1,17 @@
 @import "tailwindcss";
 
 @theme {
-  --color-primary-50: oklch(0.97 0.014 254.604);
-  --color-primary-100: oklch(0.932 0.032 255.585);
-  --color-primary-200: oklch(0.882 0.059 254.128);
-  --color-primary-300: oklch(0.809 0.105 251.813);
-  --color-primary-400: oklch(0.707 0.165 254.624);
+  --color-primary-50: #0090e3;
+  --color-primary-100: #0084cf;
+  --color-primary-200: #0077bc;
+  --color-primary-300: #006ba8;
+  --color-primary-400: #005e95;
   --color-primary-500: #005281;
-  --color-primary-600: oklch(0.546 0.245 262.881);
-  --color-primary-700: oklch(0.488 0.243 264.376);
-  --color-primary-800: oklch(0.424 0.199 265.638);
-  --color-primary-900: oklch(0.379 0.146 265.522);
-  --color-primary-950: oklch(0.282 0.091 267.935);
+  --color-primary-600: #00466d;
+  --color-primary-700: #00395a;
+  --color-primary-800: #002d46;
+  --color-primary-900: #002033;
+  --color-primary-950: #00141f;
 }
 
 :root {
@@ -32,3 +32,19 @@ body {
   font-family: var(--font-red_hat_text), Arial, Helvetica, sans-serif;
 }
 
+{/* ------------------------ Slick Arrows  ------------------------*/}
+
+.slick-arrow{
+  z-index: 50;
+}
+
+.slick-prev:before, .slick-next:before {
+  color: #709EB9 !important;
+  border-radius: 0 !important;
+  opacity: 1 !important;
+  font-size: 50px !important;
+}
+
+.slick-next {
+  right: 0px !important;
+}
