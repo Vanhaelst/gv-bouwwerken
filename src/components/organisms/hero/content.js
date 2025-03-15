@@ -1,7 +1,6 @@
 "use client";
 
 import clsx from "clsx";
-import { Container } from "@/components/atoms/container";
 import { Text } from "@/components/atoms/text/text.component";
 import RichText from "@/components/atoms/text/rich-text.component";
 
@@ -13,7 +12,9 @@ export const Content = ({
   image,
 }) => {
   return (
-    <div className={`z-10 p-10 ${bold ? "md:max-w-[55%]" : "md:max-w-[45%]"}`}>
+    <div
+      className={`z-10 md:px-10 md:mb-2 ${bold ? "md:max-w-[55%]" : "md:max-w-[45%]"}`}
+    >
       {title && (
         <Text
           as="h2"

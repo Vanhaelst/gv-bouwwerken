@@ -4,7 +4,6 @@ import { HeroImage } from "@/components/organisms/hero/image";
 import { HeroVideo } from "@/components/organisms/hero/video";
 
 export const Hero = (props) => {
-  console.log(props);
   if (props.video) {
     return <HeroVideo {...props} />;
   }

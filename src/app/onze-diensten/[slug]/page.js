@@ -23,9 +23,14 @@ export default async function Service({ params }) {
   });
 
   const service = services?.[0] ?? {};
+  const pages = [
+    { name: "Diensten", href: "/onze-diensten", current: false },
+    { name: service.title, href: "#", current: true },
+  ];
+
   return (
     <main>
-      <Hero title={service.title} size="xsmall" />
+      <Hero title={service.title} size="xsmall" breadcrumbs={pages} />
 
       <Container className="grid md:grid-cols-12">
         <div className="py-10 md:col-span-10 md:col-start-2 flex justify-center">

@@ -20,11 +20,15 @@ export default async function Realisation({ params }) {
   const { slug } = await params;
   const { hero, content, lightbox, pagination } = await getData({ slug });
 
+  const pages = [
+    { name: "Diensten", href: "/onze-diensten", current: false },
+    { name: content[0].title, href: "#", current: true },
+  ];
   const prev = pagination[0].prev;
   const next = pagination[0].next;
   return (
     <main>
-      <Hero {...hero[0]} />
+      <Hero {...hero[0]} breadcrumbs={pages} />
 
       <Container className="grid md:grid-cols-12">
         <div className="py-10 md:col-span-10 md:col-start-2 flex justify-center">
