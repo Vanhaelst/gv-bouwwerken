@@ -2,8 +2,6 @@
 
 import clsx from "clsx";
 import { Container } from "@/components/atoms/container";
-import { Text } from "@/components/atoms/text/text.component";
-import RichText from "@/components/atoms/text/rich-text.component";
 import { Content } from "@/components/organisms/hero/content";
 
 export const HeroVideo = ({
@@ -30,7 +28,7 @@ export const HeroVideo = ({
     >
       <div className="absolute left-0 top-0 w-full h-full">
         <div
-          className={`overlay z-10 w-full h-full relative bg-primary-500/60`}
+          className={`overlay z-10 w-full h-full relative bg-primary-500/25`}
         />
         <iframe
           src={`${video}&autoplay=1&loop=1&autopause=0&background=1`}

@@ -26,7 +26,7 @@ export function Header({ nav, topbar, extraNav, classnames, sticky }) {
               height={327}
               classnames={clsx(
                 "object-contain max-w-20",
-                sticky ? "w-12" : "w-18",
+                sticky ? "w-18" : "w-28",
               )}
             />
           </Link>

@@ -7,13 +7,14 @@ import { Hero } from "@/components/organisms/hero";
 import { Text } from "@/components/atoms/text/text.component";
 import { Container } from "@/components/atoms/container";
 import { ContactForm } from "@/components/organisms/form/contact";
+import Image from "@/utils/Image";
 
 async function getData() {
   return fetchData(contactQuery());
 }
 
 export default async function Contact() {
-  const { hero, globals } = await getData();
+  const { hero, content, globals } = await getData();
 
   return (
     <main>
@@ -69,6 +70,16 @@ export default async function Contact() {
             </Text>
           </div>
           <ContactForm />
+        </Container>
+
+        <Container className=" mb-10 md:mb-24">
+          <Image
+            src={content[0].image[0].url}
+            width={content[0].image[0].width}
+            height={content[0].image[0].height}
+            alt="Bouwwerken GV"
+            classnames="object-cover aspect-video w-full"
+          />
         </Container>
       </section>
     </main>

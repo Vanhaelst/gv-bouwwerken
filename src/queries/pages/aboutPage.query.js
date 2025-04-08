@@ -26,6 +26,12 @@ export const aboutQuery = () => `
         }
       }
       
+      video: aboutUsEntries {
+        ... on aboutUs_Entry {
+          url: video
+        }
+      }
+      
       introExtra: aboutUsEntries {
         ... on aboutUs_Entry {
           id

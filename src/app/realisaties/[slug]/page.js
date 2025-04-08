@@ -21,7 +21,7 @@ export default async function Realisation({ params }) {
   const { hero, content, lightbox, pagination } = await getData({ slug });
 
   const pages = [
-    { name: "Diensten", href: "/onze-diensten", current: false },
+    { name: "Realisaties", href: "/realisaties", current: false },
     { name: content[0].title, href: "#", current: true },
   ];
   const prev = pagination[0].prev;

@@ -7,15 +7,17 @@ import clsx from "clsx";
 import { Text } from "@/components/atoms/text/text.component";
 import RichText from "@/components/atoms/text/rich-text.component";
 import { Button } from "@/components/atoms/button";
+import { Container } from "@/components/atoms/container";
 
 async function getData() {
   return fetchData(aboutQuery());
 }
 
 export default async function About() {
-  const { hero, contact, intro, introExtra } = await getData();
+  const { hero, contact, intro, video, introExtra } = await getData();
   const { title, description, buttons = [] } = contact[0];
 
+  console.log(video);
   const reversed = false;
   return (
     <main>
@@ -71,6 +73,22 @@ export default async function About() {
         </div>
       </Content>
 
+      {video?.[0]?.url ? (
+        <section className="pb-10 md:pb-28">
+          <Container className="grid md:grid-cols-12">
+            <div className="py-10 md:col-span-10 md:col-start-2 flex justify-center">
+              <iframe
+                src={video[0].url}
+                allow=""
+                allowFullScreen
+                className="video aspect-video"
+                style={{ width: "100%" }}
+                title="Bouwwerken GV"
+              />
+            </div>
+          </Container>
+        </section>
+      ) : null}
       <section className="bg-[#EDEDEE] py-10 md:py-28">
         <Content {...introExtra[0]} />
       </section>
