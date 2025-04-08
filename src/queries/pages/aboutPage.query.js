@@ -28,7 +28,7 @@ export const aboutQuery = () => `
       
       video: aboutUsEntries {
         ... on aboutUs_Entry {
-          url: video
+          url: videoComponent
         }
       }
       

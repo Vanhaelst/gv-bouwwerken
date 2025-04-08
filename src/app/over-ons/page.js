@@ -17,7 +17,6 @@ export default async function About() {
   const { hero, contact, intro, video, introExtra } = await getData();
   const { title, description, buttons = [] } = contact[0];
 
-  console.log(video);
   const reversed = false;
   return (
     <main>
