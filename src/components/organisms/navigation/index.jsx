@@ -4,7 +4,7 @@ import { fetchData } from "@/utils/fetchData";
 async function getData() {
   return fetchData(`
     query MyQuery {
-      topbar: globalSet(handle: "topbar") {
+      topbar: globalSet(site: "${process.env.NEXT_PUBLIC_SITE}", handle: "topbar") {
         ... on topbar_GlobalSet {
           navigationitems {
             ... on navigationitem_Entry {
@@ -17,7 +17,7 @@ async function getData() {
         }
       }
       
-      nav: globalSet(handle: "navigation") {
+      nav: globalSet(site: "${process.env.NEXT_PUBLIC_SITE}", handle: "navigation") {
         ... on navigation_GlobalSet {
           login
           account

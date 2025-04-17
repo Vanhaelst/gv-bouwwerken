@@ -6,7 +6,7 @@ import { fetchData } from "@/utils/fetchData";
 async function getData() {
   return fetchData(`
     query MyQuery {     
-      companyData: globalSet(handle: "companyData") {
+      companyData: globalSet(site: "${process.env.NEXT_PUBLIC_SITE}", handle: "companyData") {
         ... on companyData_GlobalSet {
           phone
           mail
@@ -15,7 +15,7 @@ async function getData() {
         }
       }
       
-      socials: globalSet(handle: "companyData") {
+      socials: globalSet(site: "${process.env.NEXT_PUBLIC_SITE}", handle: "companyData") {
         ... on companyData_GlobalSet {
           facebook
           instagram
@@ -23,7 +23,7 @@ async function getData() {
         }
       }
       
-      nav: globalSet(handle: "navigation") {
+      nav: globalSet(site: "${process.env.NEXT_PUBLIC_SITE}", handle: "navigation") {
         ... on navigation_GlobalSet {
           login
           account

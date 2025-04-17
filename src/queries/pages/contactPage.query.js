@@ -3,17 +3,18 @@ import { imageQuery } from "@/queries/components/image.query";
 
 export const contactQuery = () => `
     query MyQuery {
-      hero: contactEntries{
+      hero: contactEntries(site: "${process.env.NEXT_PUBLIC_SITE}"){
         ... on contact_Entry ${heroQuery}
       }
       
-      content: contactEntries{
+      content: contactEntries(site: "${process.env.NEXT_PUBLIC_SITE}"){
         ... on contact_Entry {
+        contentHeading
         image: image2 ${imageQuery}
         }
       }
       
-      globals: globalSet(handle: "companyData") {
+      globals: globalSet(site: "${process.env.NEXT_PUBLIC_SITE}", handle: "companyData") {
         ... on companyData_GlobalSet {
           phone
           mail

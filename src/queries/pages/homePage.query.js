@@ -4,11 +4,11 @@ import { heroQuery } from "@/queries/components/hero.query";
 
 export const homeQuery = () => `
     query MyQuery {
-      hero: homeEntries {
+      hero: homeEntries(site: "${process.env.NEXT_PUBLIC_SITE}") {
         ... on home_Entry ${heroQuery}
       }
       
-      intro: homeEntries {
+      intro: homeEntries(site: "${process.env.NEXT_PUBLIC_SITE}") {
         ... on home_Entry {
           id
           title: introHeading
@@ -18,14 +18,14 @@ export const homeQuery = () => `
         }
       }
       
-      realisation: homeEntries {
+      realisation: homeEntries(site: "${process.env.NEXT_PUBLIC_SITE}") {
         ... on home_Entry {
           title: realisationHeading
           description: realisationDescription
         }
       }
       
-      realisations: realisationsEntries(limit: 5) {
+      realisations: realisationsEntries(site: "${process.env.NEXT_PUBLIC_SITE}", limit: 5) {
         ... on realisation_Entry {
           id
           uri

@@ -34,7 +34,7 @@ export default async function Contact() {
               level="md"
               classnames={clsx("text-primary-500 font-medium mb-2")}
             >
-              Bouwwerken GV
+              {content[0]?.contentHeading}
             </Text>
             <Text
               as="h2"

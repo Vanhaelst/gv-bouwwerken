@@ -4,11 +4,11 @@ import { buttonsQuery } from "@/queries/components/buttons.query";
 
 export const aboutQuery = () => `
     query MyQuery {
-      hero: aboutUsEntries {
+      hero: aboutUsEntries(site: "${process.env.NEXT_PUBLIC_SITE}") {
         ... on aboutUs_Entry ${heroQuery}
       }
       
-      intro: aboutUsEntries {
+      intro: aboutUsEntries(site: "${process.env.NEXT_PUBLIC_SITE}") {
         ... on aboutUs_Entry {
           id
           title: introHeading
@@ -17,7 +17,7 @@ export const aboutQuery = () => `
         }
       }
       
-      contact: aboutUsEntries {
+      contact: aboutUsEntries(site: "${process.env.NEXT_PUBLIC_SITE}") {
         ... on aboutUs_Entry {
           id
           title: contactHeading
@@ -26,13 +26,13 @@ export const aboutQuery = () => `
         }
       }
       
-      video: aboutUsEntries {
+      video: aboutUsEntries(site: "${process.env.NEXT_PUBLIC_SITE}") {
         ... on aboutUs_Entry {
           url: videoComponent
         }
       }
       
-      introExtra: aboutUsEntries {
+      introExtra: aboutUsEntries(site: "${process.env.NEXT_PUBLIC_SITE}") {
         ... on aboutUs_Entry {
           id
           title: introExtraHeading

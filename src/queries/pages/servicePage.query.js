@@ -3,7 +3,7 @@ import { buttonsQuery } from "@/queries/components/buttons.query";
 
 export const serviceQuery = ({ slug }) => `
     query MyQuery {
-      services: servicesEntries(slug: "${slug}") {
+      services: servicesEntries(slug: "${slug}", site: "${process.env.NEXT_PUBLIC_SITE}") {
         ... on service_Entry {
           id
           title: heading
@@ -14,7 +14,7 @@ export const serviceQuery = ({ slug }) => `
         }
       }
       
-      realisations: realisationsEntries(limit: 6) {
+      realisations: realisationsEntries(site: "${process.env.NEXT_PUBLIC_SITE}", limit: 6) {
         ... on realisation_Entry {
           id
           heading
@@ -22,7 +22,5 @@ export const serviceQuery = ({ slug }) => `
           image: featuredImage ${imageQuery}
         }
       }
-      
-      
     }
 `;
