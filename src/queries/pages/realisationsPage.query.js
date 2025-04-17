@@ -7,7 +7,7 @@ export const realisationsPageQuery = ({ service }) => `
         ... on fixedPage_Entry ${heroQuery}
       }
       
-      realisations: realisationsEntries(site: "${process.env.NEXT_PUBLIC_SITE}" ${service ? ', service: ["${service}"]' : ""}) {
+      realisations: realisationsEntries(site: "${process.env.NEXT_PUBLIC_SITE}" ${service ? `, service: ["${service}"]` : ""}) {
         ... on realisation_Entry {
           id
           heading

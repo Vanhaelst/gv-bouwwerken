@@ -1,9 +1,7 @@
 "use client";
 
 import { fetchData } from "@/utils/fetchData";
-import { realisationsPageQuery } from "@/queries/pages/realisationsPage.query";
 
-import { Hero } from "@/components/organisms/hero";
 import { RealisationsOverview } from "@/components/molecules/realisaties/overview";
 import { useEffect, useState } from "react";
 import { Button } from "@/components/atoms/button";
@@ -50,8 +48,7 @@ export const RealisationsClient = ({ defaultRealisations }) => {
   useEffect(() => {
     if (filter !== "") {
       getData({ service: filter }).then((data) => {
-        console.log(data);
-        setRealisations(data);
+        setRealisations(data?.realisations);
       });
     } else {
       setRealisations(defaultRealisations);
@@ -78,7 +75,18 @@ export const RealisationsClient = ({ defaultRealisations }) => {
         </div>
       </Container>
 
-      <RealisationsOverview realisations={realisations} />
+      {realisations?.length > 0 ? (
+        <RealisationsOverview realisations={realisations} />
+      ) : (
+        <div className="text-center  py-24">
+          <h3 className="mt-2 text-sm font-semibold text-gray-900">
+            Geen projecten gevonden met {filter}
+          </h3>
+          <p className="mt-1 text-sm text-gray-500">
+            Neem contact met ons op voor vragen of een gratis offerte.
+          </p>
+        </div>
+      )}
     </>
   );
 };
