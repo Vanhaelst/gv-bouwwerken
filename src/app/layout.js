@@ -9,16 +9,26 @@ const redHatText = Red_Hat_Text({
   subsets: ["latin"],
 });
 
-export const metadata = {
-  title: "Bouwwerken GV | Metsel-, Beton- en Bouwprojecten",
-  description: "De focus van bouwwerken Glenn Verhasselt ligt op metsel- en betonwerken en op volledige bouwprojecten zoals nieuwbouw en renovatie. Regio Leest Mechelen",
-    keywords: "bouwwerken, metsel, beton, bouwprojecten, nieuwbouw, renovatie, regio leest mechelen",
-    locale: "nl-NL",
-    type: "website",
-    robots: "index, follow",
-    site_name: "Bouwwerken GV",
-    logo: "/logo.png",
-};
+export const metadata = process.env.NEXT_PUBLIC_SITE === "gvInvest" ?
+    {
+        title: "GV Invest | Metsel-, Beton- en Bouwprojecten",
+        description: "De focus van  GV Invest ligt op metsel- en betonwerken en op volledige bouwprojecten zoals nieuwbouw en renovatie.",
+        keywords: "invest, investeren, bouwwerken, metsel, beton, bouwprojecten, nieuwbouw, renovatie, regio leest mechelen",
+        locale: "nl-NL",
+        type: "website",
+        robots: "index, follow",
+        site_name: "GV INVEST",
+        logo: "/logo.png",
+    } : {
+        title: "Bouwwerken GV | Metsel-, Beton- en Bouwprojecten",
+        description: "De focus van bouwwerken Glenn Verhasselt ligt op metsel- en betonwerken en op volledige bouwprojecten zoals nieuwbouw en renovatie. Regio Leest Mechelen",
+        keywords: "bouwwerken, metsel, beton, bouwprojecten, nieuwbouw, renovatie, regio leest mechelen",
+        locale: "nl-NL",
+        type: "website",
+        robots: "index, follow",
+        site_name: "Bouwwerken GV",
+        logo: "/logo.png",
+    };
 
 export default function RootLayout({ children }) {
   return (
