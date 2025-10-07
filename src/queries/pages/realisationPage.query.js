@@ -28,12 +28,13 @@ export const realisationQuery = ({ slug }) => `
             id
             slug
             title
-            slug
+            image: featuredImage ${imageQuery}
           }
           next(section: "realisations", orderBy: "postDate asc") {
             id
             slug
             title
+            image: featuredImage ${imageQuery}
           }
         }
       }

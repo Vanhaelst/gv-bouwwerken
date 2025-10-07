@@ -69,9 +69,12 @@ export default async function Realisation({ params }) {
               className={clsx(
                 next ? "aspect-video" : "aspect-[32/9]",
                 "group cursor-pointer relative before:transition-all duration-300",
-                "flex items-center justify-start p-4 object-cover w-full bg-[url('/hero.png')]",
+                `flex items-center justify-start p-4 bg-cover bg-center w-full`,
                 "before:content-[''] before:absolute before:inset-0 before:block before:bg-black/50 hover:before:bg-black/40 before:z-[5]",
               )}
+              style={{
+                backgroundImage: `url(${prev.image[0].url || "/hero.png"})`,
+              }}
             >
               <Text classnames="flex z-10 text-white">
                 <ChevronLeftIcon
@@ -90,9 +93,12 @@ export default async function Realisation({ params }) {
               className={clsx(
                 prev ? "aspect-video" : "aspect-[32/9]",
                 "group cursor-pointer relative before:transition-all duration-300",
-                "flex items-center justify-end p-4 object-cover w-full bg-[url('/hero.png')]",
+                `flex items-center justify-end p-4 bg-cover bg-center w-full`,
                 "before:content-[''] before:absolute before:inset-0 before:block before:bg-black/50 hover:before:bg-black/40 before:z-[5]",
               )}
+              style={{
+                backgroundImage: `url(${next.image[0].url || "/hero.png"})`,
+              }}
             >
               <Text classnames="flex z-10 text-white">
                 Volgende project

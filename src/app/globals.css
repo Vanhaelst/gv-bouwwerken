@@ -12,6 +12,8 @@
   --color-primary-800: #002d46;
   --color-primary-900: #002033;
   --color-primary-950: #00141f;
+
+    --transparent-white: rgba(255, 255, 255, 0.75);
 }
 
 :root {
