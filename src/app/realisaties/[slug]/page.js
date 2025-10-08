@@ -11,6 +11,7 @@ import { Text } from "@/components/atoms/text/text.component";
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/outline";
 import { RealisationLightbox } from "@/components/molecules/realisaties/lightbox";
 import RichText from "@/components/atoms/text/rich-text.component";
+import { Fishe } from "@/app/realisaties/[slug]/fishe";
 
 async function getData({ slug }) {
   return fetchData(realisationQuery({ slug }));
@@ -18,7 +19,9 @@ async function getData({ slug }) {
 
 export default async function Realisation({ params }) {
   const { slug } = await params;
-  const { hero, content, lightbox, pagination } = await getData({ slug });
+  const { hero, content, fishe, lightbox, pagination } = await getData({
+    slug,
+  });
 
   const pages = [
     { name: "Realisaties", href: "/realisaties", current: false },
@@ -61,6 +64,10 @@ export default async function Realisation({ params }) {
       </Container>
 
       <RealisationLightbox lightbox={lightbox} />
+
+      {fishe?.[0]?.fishe ? (
+        <Fishe title={hero?.[0]?.title} fishe={fishe[0]} />
+      ) : null}
 
       <Container className="grid md:grid-cols-2 gap-4 mb-10">
         {prev ? (

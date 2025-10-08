@@ -15,6 +15,50 @@ export const realisationQuery = ({ slug }) => `
         }
       }
       
+      fishe: realisationsEntries(site: "${process.env.NEXT_PUBLIC_SITE}", slug: "${slug}") {
+        ... on realisation_Entry {
+          fishe
+          
+          bathroom
+          all
+          heating,
+          heatingMaterial
+          heatingRadiator
+          hotWater
+          utilities
+          carpentry
+          isolation
+          condition
+          
+          buildyear
+          regionalPlan
+          cadastralData
+          urbanPlanningInformation
+          cadastralIncome
+          oLevel
+          pScore
+          gScore
+          
+          environment
+          plotOrientation
+          facadeOrientation
+          
+          habitableArea
+          streetWidth
+          buildType
+          
+          parking
+          
+          attachments {
+            id
+            url
+            size
+            title
+            filename
+          }
+        }
+      }
+      
       lightbox: realisationsEntries(site: "${process.env.NEXT_PUBLIC_SITE}", slug: "${slug}") {
         ... on realisation_Entry {
           image: images ${imageQuery}
