@@ -21,7 +21,7 @@ export const RealisationLightbox = ({ lightbox }) => {
   });
 
   return (
-    <Container className="grid md:grid-cols-12">
+    <Container className="grid md:grid-cols-12" id="lightbox">
       <Lightbox
         index={index}
         open={index >= 0}

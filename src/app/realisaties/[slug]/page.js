@@ -12,6 +12,8 @@ import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/outline";
 import { RealisationLightbox } from "@/components/molecules/realisaties/lightbox";
 import RichText from "@/components/atoms/text/rich-text.component";
 import { Fishe } from "@/app/realisaties/[slug]/fishe";
+import { Button } from "@/components/atoms/button";
+import { ContactForm } from "@/components/organisms/form/contact";
 
 async function getData({ slug }) {
   return fetchData(realisationQuery({ slug }));
@@ -19,66 +21,111 @@ async function getData({ slug }) {
 
 export default async function Realisation({ params }) {
   const { slug } = await params;
-  const { hero, content, fishe, lightbox, pagination } = await getData({
-    slug,
-  });
+  const { hero, content, fishe, lightbox, pagination, globals } = await getData(
+    {
+      slug,
+    },
+  );
 
   const pages = [
     { name: "Realisaties", href: "/realisaties", current: false },
     { name: content[0].title, href: "#", current: true },
   ];
+
   const prev = pagination[0].prev;
   const next = pagination[0].next;
   return (
     <main>
       <Hero {...hero[0]} breadcrumbs={pages} />
 
-      <Container className="grid md:grid-cols-12">
-        <div className="py-10 md:col-span-10 md:col-start-2 flex justify-center">
-          <Image
-            src={content[0].image[0].url}
-            width={content[0].image[0].width}
-            height={content[0].image[0].height}
-            alt={content[0].image[0].alt || content[0].title}
-            classnames="object-cover aspect-video w-full"
-          />
-        </div>
-
-        <div className="bg-white py-10 md:col-span-6 md:col-start-6 flex justify-center md:-mt-[40%]">
-          <div className="p-8 w-full">
-            <Text
-              as="h3"
-              level="xl"
-              classnames={clsx("mb-1 text-primary-500 font-medium")}
-            >
-              {content[0].title}
-            </Text>
-            {content[0].price ? (
-              <Text
-                as="h3"
-                level="md"
-                classnames={clsx("mb-6 text-gray-700 font-thin")}
-              >
-                {content[0].price}
-              </Text>
-            ) : null}
-            <RichText
-              text={content[0].description}
-              level="md"
-              as="p"
-              classnames={clsx("mb-6")}
+      <section id="content">
+        <Container className="grid md:grid-cols-12 md:pt-16">
+          <div className="py-10 md:col-span-10 md:col-start-2 flex justify-center">
+            <Image
+              src={content[0].image[0].url}
+              width={content[0].image[0].width}
+              height={content[0].image[0].height}
+              alt={content[0].image[0].alt || content[0].title}
+              classnames="object-cover aspect-video w-full"
             />
           </div>
-        </div>
-      </Container>
 
-      <RealisationLightbox lightbox={lightbox} />
+          <div className="bg-white py-10 md:col-span-6 md:col-start-6 flex justify-center md:-mt-[40%]">
+            <div className="p-8 w-full">
+              <Text
+                as="h3"
+                level="xl"
+                classnames={clsx("mb-1 text-primary-500 font-medium")}
+              >
+                {content[0].title}
+              </Text>
+              {content[0].price ? (
+                <Text
+                  as="h3"
+                  level="md"
+                  classnames={clsx("mb-6 text-gray-700 font-thin")}
+                >
+                  {content[0].price}
+                </Text>
+              ) : null}
+              <RichText
+                text={content[0].description}
+                level="md"
+                as="p"
+                classnames={clsx("mb-6")}
+              />
+            </div>
+          </div>
+        </Container>
+
+        <RealisationLightbox lightbox={lightbox} />
+      </section>
 
       {fishe?.[0]?.fishe ? (
         <Fishe title={hero?.[0]?.title} fishe={fishe[0]} />
       ) : null}
 
-      <Container className="grid md:grid-cols-2 gap-4 mb-10">
+      <Container className="grid md:grid-cols-12 my-10 md:my-24">
+        <div
+          className={clsx(
+            "",
+            "flex flex-col justify-start py-10",
+            "md:col-span-3 md:col-start-2",
+          )}
+        >
+          <Text
+            as="h2"
+            level="md"
+            classnames={clsx("text-primary-500 font-medium mb-2")}
+          >
+            Meer info over dit project?
+          </Text>
+          <Text
+            as="h2"
+            level="sm"
+            classnames={clsx("text-black font-medium mb-4")}
+          >
+            {globals.address1}
+            <br /> {globals.address2}
+          </Text>
+          <Text as="h2" level="sm" classnames={clsx("text-black font-medium")}>
+            <a
+              href={`mailto:${globals.mail}`}
+              className="hover:text-primary-500"
+            >
+              {globals.mail}
+            </a>
+          </Text>
+          <Text as="h2" level="sm" classnames={clsx("text-black font-medium")}>
+            <a href={`tel:${globals.phone}`} className="hover:text-primary-500">
+              {globals.phone}
+            </a>
+          </Text>
+        </div>
+        <ContactForm />
+      </Container>
+
+      <Container className="grid md:grid-cols-2 gap-4 mb-10" id="pagination">
         {prev ? (
           <Link href={prev.slug} className={next ? "" : "col-span-2"}>
             <div

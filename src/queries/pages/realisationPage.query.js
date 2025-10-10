@@ -85,5 +85,14 @@ export const realisationQuery = ({ slug }) => `
         }
       }
       
+      globals: globalSet(site: "${process.env.NEXT_PUBLIC_SITE}", handle: "companyData") {
+        ... on companyData_GlobalSet {
+          phone
+          mail
+          address1
+          address2
+        }
+      }
+      
     }
 `;
