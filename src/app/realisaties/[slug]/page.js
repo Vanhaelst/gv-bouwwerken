@@ -45,14 +45,23 @@ export default async function Realisation({ params }) {
         </div>
 
         <div className="bg-white py-10 md:col-span-6 md:col-start-6 flex justify-center md:-mt-[40%]">
-          <div className="p-8">
+          <div className="p-8 w-full">
             <Text
               as="h3"
               level="xl"
-              classnames={clsx("mb-6 text-primary-500 font-medium")}
+              classnames={clsx("mb-1 text-primary-500 font-medium")}
             >
               {content[0].title}
             </Text>
+            {content[0].price ? (
+              <Text
+                as="h3"
+                level="md"
+                classnames={clsx("mb-6 text-gray-700 font-thin")}
+              >
+                {content[0].price}
+              </Text>
+            ) : null}
             <RichText
               text={content[0].description}
               level="md"

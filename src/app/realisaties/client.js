@@ -76,7 +76,11 @@ export const RealisationsClient = ({ defaultRealisations }) => {
       </Container>
 
       {realisations?.length > 0 ? (
-        <RealisationsOverview realisations={realisations} />
+        <RealisationsOverview
+          realisations={realisations.sort(
+            (firstItem, secondItem) => firstItem.sold - secondItem.sold,
+          )}
+        />
       ) : (
         <div className="text-center  py-24">
           <h3 className="mt-2 text-sm font-semibold text-gray-900">

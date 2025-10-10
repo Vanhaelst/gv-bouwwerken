@@ -8,6 +8,8 @@ export const realisationsQuery = ({ service }) => `
           heading
           uri
           image: featuredImage ${imageQuery}
+          price
+          sold
         }
       } 
     }

@@ -12,6 +12,8 @@ export const realisationQuery = ({ slug }) => `
           title: contentHeading
           description: contentDescription
           image: featuredImage ${imageQuery}
+          price
+          sold
         }
       }
       

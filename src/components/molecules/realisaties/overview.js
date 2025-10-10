@@ -18,9 +18,14 @@ export const RealisationsOverview = ({ realisations }) => {
             realisations.map((realisation) => {
               return (
                 <Link
+                  aria-disabled={realisation.sold}
                   key={realisation.id}
-                  href={`/${realisation.uri}`}
-                  className="group relative overflow-hidden"
+                  href={realisation.sold ? "#" : `/${realisation.uri}`}
+                  tabIndex={realisation.sold ? -1 : 0}
+                  className={clsx(
+                    realisation.sold ? "grayscale pointer-events-none" : "",
+                    "group relative overflow-hidden",
+                  )}
                 >
                   <div
                     className={clsx(
@@ -34,13 +39,20 @@ export const RealisationsOverview = ({ realisations }) => {
                       width={realisation.image[0].width}
                       height={realisation.image[0].height}
                       alt={realisation.image[0].alt || ""}
-                      classnames="object-cover aspect-square rounded-md transition-all duration-700 hover:scale-105"
+                      classnames={clsx(
+                        "transition-all duration-700 hover:scale-105",
+                        "object-cover aspect-square rounded-md ",
+                      )}
                     />
                     <Text
                       level="md"
-                      classnames="absolute bottom-[10px] left-[10px] bg-(--transparent-white) px-5 py-2 rounded-md group-hover:-bottom-20 transition-all duration-500"
+                      classnames={clsx(
+                        "group-hover:-bottom-20 transition-all duration-500",
+                        "absolute bottom-[10px] left-[10px] bg-(--transparent-white) px-5 py-2 rounded-md",
+                      )}
                     >
-                      {realisation.heading}
+                      {realisation.heading}{" "}
+                      {realisation.sold ? "(verkocht)" : ""}
                     </Text>
                   </div>
                 </Link>
