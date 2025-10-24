@@ -113,45 +113,54 @@ export default async function Realisation({ params }) {
         <Fishe title={hero?.[0]?.title} fishe={fishe[0]} />
       ) : null}
 
-      <Container className="grid md:grid-cols-12 my-10 md:my-24">
-        <div
-          className={clsx(
-            "",
-            "flex flex-col justify-start py-10",
-            "md:col-span-3 md:col-start-2",
-          )}
-        >
-          <Text
-            as="h2"
-            level="md"
-            classnames={clsx("text-primary-500 font-medium mb-2")}
+      {process.env.NEXT_PUBLIC_SITE === "gvInvest" ? (
+        <Container className="grid md:grid-cols-12 my-10 md:my-24">
+          <div
+            className={clsx(
+              "",
+              "flex flex-col justify-start py-10",
+              "md:col-span-3 md:col-start-2",
+            )}
           >
-            Meer info over dit project?
-          </Text>
-          <Text
-            as="h2"
-            level="sm"
-            classnames={clsx("text-black font-medium mb-4")}
-          >
-            {globals.address1}
-            <br /> {globals.address2}
-          </Text>
-          <Text as="h2" level="sm" classnames={clsx("text-black font-medium")}>
-            <a
-              href={`mailto:${globals.mail}`}
-              className="hover:text-primary-500"
+            <Text
+              as="h2"
+              level="md"
+              classnames={clsx("text-primary-500 font-medium mb-2")}
             >
-              {globals.mail}
-            </a>
-          </Text>
-          <Text as="h2" level="sm" classnames={clsx("text-black font-medium")}>
-            <a href={`tel:${globals.phone}`} className="hover:text-primary-500">
-              {globals.phone}
-            </a>
-          </Text>
-        </div>
-        <ContactForm />
-      </Container>
+              Meer info over dit project?
+            </Text>
+            <Text
+              as="h2"
+              level="sm"
+              classnames={clsx("text-black font-medium")}
+            >
+              <a
+                href={`mailto:${globals.mail}`}
+                className="hover:text-primary-500"
+              >
+                {globals.mail}
+              </a>
+            </Text>
+            <Text
+              as="h2"
+              level="sm"
+              classnames={clsx("text-black font-medium")}
+            >
+              <a
+                href={`tel:${globals.phone}`}
+                className="hover:text-primary-500"
+              >
+                {globals.phone}
+              </a>
+            </Text>
+          </div>
+          <ContactForm
+            project={content[0].title}
+            id={content[0].id}
+            slug={content[0].url}
+          />
+        </Container>
+      ) : null}
 
       {process.env.NEXT_PUBLIC_SITE === "bouwwerkenGv" ? (
         <Container className="grid md:grid-cols-2 gap-4 mb-10" id="pagination">

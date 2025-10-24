@@ -16,13 +16,13 @@ export async function POST(req, res) {
     body: JSON.stringify({
       templateId: templateId,
       sender: {
-        email: "noreply@bb-m.be",
-        name: "BBM",
+        email: "noreply@bouwwerken-gv.be",
+        name: "Bouwwerken GV",
       },
       to: [
         {
-          email: "noreply@bb-m.be",
-          name: "BBM",
+          email: "noreply@bouwwerken-gv.be",
+          name: "Bouwwerken GV",
         },
       ],
       params: data,

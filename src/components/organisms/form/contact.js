@@ -14,7 +14,7 @@ import { Input } from "@/components/atoms/form/input";
 import { TextArea } from "@/components/atoms/form/TextArea";
 import { Button } from "@/components/atoms/button";
 
-export const ContactForm = () => {
+export const ContactForm = ({ project, slug, id }) => {
   const [showSuccess, setShowSuccess] = useState(false);
   const [showError, setShowError] = useState(false);
   const [isSending, setIsSending] = useState(false);
@@ -23,8 +23,6 @@ export const ContactForm = () => {
     handleSubmit,
     register,
     reset,
-    clearErrors,
-    setValue,
     formState: { errors },
   } = useForm({
     defaultValues: {
@@ -32,6 +30,9 @@ export const ContactForm = () => {
       phone: "",
       mail: "",
       message: "",
+      project,
+      slug,
+      id,
     },
   });
 
@@ -51,7 +52,7 @@ export const ContactForm = () => {
 
       setShowSuccess(true);
       setIsSending(false);
-      reset();
+      // reset();
     } catch (error) {
       console.error(error);
       setIsSending(false);

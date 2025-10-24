@@ -12,35 +12,28 @@ const graphQLClient = new GraphQLClient(craftUrl, {
 export async function POST(request, response) {
   const body = await request.json();
 
+  console.log(body);
+
   const mutation = gql`
     mutation saveEntry(
       $title: String!
-      $role: String!
-      $diploma: String
-      $major: String
-      $practice: String
-      $company: String
-      $function: String
-      $firstname: String!
-      $lastname: String!
       $phone: String!
       $mail: String!
       $message: String!
+      $project: String!
+      $id: String!
     ) {
-      save_contactForm_contactform_Entry(
+      save_contactForm_contactForm_Entry(
         title: $title
-        role: $role
-        diploma: $diploma
-        major: $major
-        practice: $practice
-        company: $company
-        function: $function
-        firstname: $firstname
-        lastname: $lastname
         phone: $phone
         mail: $mail
         message: $message
+        project: $project
+        id: $id
 
+        siteId: ${Number(process.env.CRAFT_SITE_ID)}
+        authorId: ${Number(process.env.CRAFT_AUTHOR_ID)}
+        
         enabled: false
       ) {
         title
@@ -50,11 +43,18 @@ export async function POST(request, response) {
 
   const result = await graphQLClient
     .request(mutation, {
-      ...body,
+      title: body.title,
+      phone: body.phone,
+      mail: body.mail,
+      message: body.message,
+      project: body.project,
+      slug: body.slug,
+      id: body.id,
     })
     .then((res) => res)
     .catch((err) => err);
 
+  console.log(result);
   return NextResponse.json(result, {
     status: 200,
   });

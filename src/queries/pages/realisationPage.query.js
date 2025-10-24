@@ -9,6 +9,8 @@ export const realisationQuery = ({ slug }) => `
       
       content: realisationsEntries(site: "${process.env.NEXT_PUBLIC_SITE}", slug: "${slug}") {
         ... on realisation_Entry {
+          id
+          url
           title: contentHeading
           description: contentDescription
           image: featuredImage ${imageQuery}

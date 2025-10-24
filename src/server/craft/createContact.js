@@ -1,4 +1,5 @@
 export const createContact = async (obj) => {
+  console.log(obj);
   const result = await fetch("/api/craft/create/contact", {
     method: "POST",
     headers: {

@@ -4,7 +4,7 @@ import fallback from "../../public/fallback-image.png";
 import Image from "next/image";
 import { useState } from "react";
 
-function ImageWithFallback({ src, alt, width, height, objectFit, classnames }) {
+function ImageWithFallback({ src, alt, width, height, classnames }) {
   const [imageError, setImageError] = useState(false);
 
   return (
@@ -13,7 +13,6 @@ function ImageWithFallback({ src, alt, width, height, objectFit, classnames }) {
       alt={alt}
       width={width}
       height={height}
-      objectFit={objectFit || "cover"}
       onError={() => setImageError(true)}
       className={classnames}
     />

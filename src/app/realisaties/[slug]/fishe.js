@@ -36,7 +36,7 @@ export const Fishe = ({ title, fishe }) => {
             <div>
               <div className="px-4 sm:px-0 mb-4">
                 <Text as="h2" level="2xl">
-                  Technische fishe
+                  Technische fiche
                 </Text>
                 <p className="mt-1 max-w-2xl text-sm/6 text-gray-500 ">
                   Alle technische informatie over {title}

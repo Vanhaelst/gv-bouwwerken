@@ -3,10 +3,6 @@ const nextConfig = {
   images: {
     remotePatterns: [
       {
-        protocol: "https",
-        hostname: "bb-m.be",
-      },
-      {
         protocol: "http",
         hostname: "gv.pluxit.be",
       },
