@@ -98,7 +98,7 @@ export const RealisationsClient = ({ defaultRealisations }) => {
   useEffect(() => {
     if (filter === buttons[0]) {
       setRealisations(defaultRealisations);
-      // setLoading(false);
+      setLoading(false);
     } else {
       getData(
         process.env.NEXT_PUBLIC_SITE === "bouwwerkenGv"
