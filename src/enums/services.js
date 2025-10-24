@@ -3,4 +3,6 @@ export const SERVICES = {
   betonwerken: "betonwerken",
   nieuwbouw: "nieuwbouw",
   renovatie: "renovatie",
+  teKoop: false,
+  verkocht: true,
 };

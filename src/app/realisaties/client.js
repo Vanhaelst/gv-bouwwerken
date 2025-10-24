@@ -9,7 +9,7 @@ import { Container } from "@/components/atoms/container";
 import { SERVICES } from "@/enums/services";
 import { realisationsQuery } from "@/queries/channels/realisations.query";
 
-const buttons = [
+const buttonsBouwwerken = [
   {
     id: 0,
     cta: "Alle",
@@ -35,23 +35,79 @@ const buttons = [
     cta: "Renovatie",
     value: SERVICES.renovatie,
   },
+  {
+    id: 5,
+    cta: "Te koop",
+    value: SERVICES.renovatie,
+  },
+  {
+    id: 6,
+    cta: "Verkocht",
+    value: SERVICES.renovatie,
+  },
 ];
 
-async function getData({ service }) {
-  return fetchData(realisationsQuery({ service }));
+const buttonsInvest = [
+  {
+    id: 0,
+    cta: "Alle",
+    value: "",
+  },
+  {
+    id: 1,
+    cta: "Te koop",
+    value: SERVICES.teKoop,
+  },
+  {
+    id: 2,
+    cta: "Verkocht",
+    value: SERVICES.verkocht,
+  },
+];
+
+const buttons =
+  process.env.NEXT_PUBLIC_SITE === "bouwwerkenGv"
+    ? buttonsBouwwerken
+    : buttonsInvest;
+
+async function getData({ service, sold }) {
+  return fetchData(
+    realisationsQuery({ service: service?.value, sold: sold?.value }),
+  );
 }
 
 export const RealisationsClient = ({ defaultRealisations }) => {
   const [realisations, setRealisations] = useState(defaultRealisations);
-  const [filter, setFilter] = useState("");
+  const [loading, setLoading] = useState(true);
+  const [filter, setFilter] = useState(undefined);
+
+  const handleFilter = async (filter) => {
+    await setLoading(true);
+    await setFilter(filter || "");
+    setTimeout(() => {
+      setLoading(false);
+    }, 1000);
+  };
 
   useEffect(() => {
-    if (filter !== "") {
-      getData({ service: filter }).then((data) => {
-        setRealisations(data?.realisations);
-      });
-    } else {
+    if (filter === undefined) {
+      setFilter(buttons[0]);
+    }
+  }, [filter]);
+
+  useEffect(() => {
+    if (filter === buttons[0]) {
       setRealisations(defaultRealisations);
+      // setLoading(false);
+    } else {
+      getData(
+        process.env.NEXT_PUBLIC_SITE === "bouwwerkenGv"
+          ? { service: filter }
+          : { sold: filter || "" },
+      ).then((data) => {
+        setRealisations(data?.realisations);
+        setLoading(false);
+      });
     }
   }, [filter]);
   return (
@@ -64,8 +120,8 @@ export const RealisationsClient = ({ defaultRealisations }) => {
                 <Button
                   key={button.id}
                   color="primary"
-                  variant={filter === button.value ? "solid" : "outline"}
-                  onClick={() => setFilter(button.value)}
+                  variant={filter?.cta === button.cta ? "solid" : "outline"}
+                  onClick={() => handleFilter(button)}
                 >
                   {button.cta}
                 </Button>
@@ -77,6 +133,7 @@ export const RealisationsClient = ({ defaultRealisations }) => {
 
       {realisations?.length > 0 ? (
         <RealisationsOverview
+          loading={loading}
           realisations={realisations.sort(
             (firstItem, secondItem) => firstItem.sold - secondItem.sold,
           )}
@@ -84,7 +141,7 @@ export const RealisationsClient = ({ defaultRealisations }) => {
       ) : (
         <div className="text-center  py-24">
           <h3 className="mt-2 text-sm font-semibold text-gray-900">
-            Geen projecten gevonden met {filter}
+            Geen projecten gevonden met filter "{filter.cta}"
           </h3>
           <p className="mt-1 text-sm text-gray-500">
             Neem contact met ons op voor vragen of een gratis offerte.

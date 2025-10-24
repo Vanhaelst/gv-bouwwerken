@@ -1,8 +1,11 @@
 import { imageQuery } from "@/queries/components/image.query";
 
-export const realisationsQuery = ({ service }) => `
+export const realisationsQuery = ({ service, sold }) => `
     query MyQuery {
-      realisations: realisationsEntries(site: "${process.env.NEXT_PUBLIC_SITE}" ${service ? `, service: ["${service}"]` : ""}) {
+      realisations: realisationsEntries(
+      site: "${process.env.NEXT_PUBLIC_SITE}" 
+      ${sold !== "" ? `, sold: ${sold}` : ""} 
+      ${service ? `, service: ["${service}"]` : ""}) {
         ... on realisation_Entry {
           id
           heading

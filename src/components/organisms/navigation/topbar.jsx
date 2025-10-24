@@ -7,7 +7,7 @@ import { NavLink } from "@/components/organisms/navigation/NavLink";
 export function Topbar({ items }) {
   return (
     <>
-      <div className="hidden lg:block relative z-50 bg-white border-b border-slate-200 px-4">
+      <div className="hidden lg:block relative z-50 bg-primary-500 px-4">
         <Container className="relative z-50 flex justify-end">
           <div className="flex items-center md:gap-x-12">
             <div className="hidden md:flex md:gap-x-6 py-2 items-center">
@@ -27,7 +27,7 @@ export function Topbar({ items }) {
                     key={id}
                     href={href}
                     level="xs"
-                    className="text-slate-800 hover:underline"
+                    classnames="text-white hover:text-white hover:underline"
                   >
                     {title}
                   </NavLink>

@@ -4,7 +4,7 @@ import { Topbar } from "./topbar";
 import { Header } from "./header";
 import { useEffect, useState } from "react";
 
-export function NavigationClient({ nav, topbar, extraNav }) {
+export function NavigationClient({ nav, topbar, companyData, extraNav }) {
   const [sticky, setSticky] = useState(false);
 
   const onScroll = () => {
@@ -27,6 +27,7 @@ export function NavigationClient({ nav, topbar, extraNav }) {
       <Header
         topbar={topbar}
         nav={nav}
+        companyData={companyData}
         extraNav={extraNav}
         classnames="relative"
       />
@@ -36,6 +37,7 @@ export function NavigationClient({ nav, topbar, extraNav }) {
         sticky
         topbar={topbar}
         nav={nav}
+        companyData={companyData}
         extraNav={extraNav}
         classnames={`${sticky ? "top-0" : "-top-40"} fixed shadow-xl left-0 w-full transition-all duration-300`}
       />

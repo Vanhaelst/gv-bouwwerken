@@ -2,16 +2,22 @@ import { Container } from "@/components/atoms/container";
 import { Text } from "@/components/atoms/text/text.component";
 import clsx from "clsx";
 import { fetchData } from "@/utils/fetchData";
+import { imageQuery } from "@/queries/components/image.query";
+import Image from "@/utils/Image";
+import RichText from "@/components/atoms/text/rich-text.component";
 
 async function getData() {
   return fetchData(`
     query MyQuery {     
       companyData: globalSet(site: "${process.env.NEXT_PUBLIC_SITE}", handle: "companyData") {
         ... on companyData_GlobalSet {
+          heading
+          description
           phone
           mail
           address1
           address2
+          footerLogo ${imageQuery}
         }
       }
       
@@ -49,10 +55,12 @@ async function getData() {
 
 export default async function Footer() {
   const { companyData, socials, nav } = await getData();
+  const logo = companyData?.footerLogo?.[0];
 
   const social = [
     {
       name: "Facebook",
+      active: !!socials.facebook,
       href: socials.facebook,
       icon: (props) => (
         <svg fill="currentColor" viewBox="0 0 24 24" {...props}>
@@ -67,6 +75,7 @@ export default async function Footer() {
     {
       name: "Instagram",
       href: socials.instagram,
+      active: !!socials.instagram,
       icon: (props) => (
         <svg fill="currentColor" viewBox="0 0 24 24" {...props}>
           <path
@@ -78,7 +87,9 @@ export default async function Footer() {
       ),
     },
   ];
+  const hasSocials = social.find((social) => social.active);
 
+  console.log(companyData);
   return (
     <footer className="">
       <div
@@ -90,11 +101,19 @@ export default async function Footer() {
         <Container className="pb-8 pt-16 sm:pt-24 lg:px-8 lg:pt-32 z-10">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-8">
             <div className="lg:col-start-2 lg:col-span-2">
-              <img
-                alt="Bouwwerken GV"
-                src="/logo.png"
-                className="w-24 object-contain"
+              <Image
+                src={logo ? logo.url : "/logo.png"}
+                alt="BBM"
+                width={logo ? logo.width : 593}
+                height={logo ? logo.height : 327}
+                classnames={clsx(
+                  "object-contain",
+                  process.env.NEXT_PUBLIC_SITE === "bouwwerkenGv"
+                    ? "w-28"
+                    : "w-40",
+                )}
               />
+              <RichText text={companyData?.description} level="sm" />
             </div>
             <div className="lg:col-start-4 lg:col-span-3">
               <Text
@@ -102,7 +121,7 @@ export default async function Footer() {
                 level="md"
                 classnames={clsx("text-primary-500 font-medium mb-2")}
               >
-                Bouwwerken GV
+                {companyData.heading}
               </Text>
               <Text
                 as="h2"
@@ -138,25 +157,29 @@ export default async function Footer() {
               </Text>
             </div>
             <div className="lg:col-span-3">
-              <Text
-                as="h2"
-                level="md"
-                classnames={clsx("text-primary-500 font-medium mb-2")}
-              >
-                Volg ons
-              </Text>
+              {hasSocials ? (
+                <Text
+                  as="h2"
+                  level="md"
+                  classnames={clsx("text-primary-500 font-medium mb-2")}
+                >
+                  Volg ons
+                </Text>
+              ) : null}
               <ul role="list" className="flex space-x-2">
-                {social.map((item) => (
-                  <a
-                    key={item.name}
-                    href={item.href}
-                    target="_blank"
-                    className="text-gray-600 hover:text-gray-800"
-                  >
-                    <span className="sr-only">{item.name}</span>
-                    <item.icon aria-hidden="true" className="size-6" />
-                  </a>
-                ))}
+                {social.map((item) => {
+                  return item.active ? (
+                    <a
+                      key={item.name}
+                      href={item.href}
+                      target="_blank"
+                      className="text-gray-600 hover:text-gray-800"
+                    >
+                      <span className="sr-only">{item.name}</span>
+                      <item.icon aria-hidden="true" className="size-6" />
+                    </a>
+                  ) : null;
+                })}
               </ul>
             </div>
             <div className="lg:col-span-2 space-y-6">

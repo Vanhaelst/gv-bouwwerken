@@ -11,22 +11,36 @@ import { Container } from "@/components/atoms/container";
 import { NavLink } from "@/components/organisms/navigation/NavLink";
 import { PopoverItem } from "@/components/organisms/navigation/popover";
 
-export function Header({ nav, topbar, extraNav, classnames, sticky }) {
+export function Header({
+  nav,
+  topbar,
+  companyData,
+  extraNav,
+  classnames,
+  sticky,
+}) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
+  const logo = companyData?.navigationLogo?.[0];
   return (
     <nav className={clsx(classnames, "bg-white z-40", sticky ? "" : "py-4")}>
       <Container className="py-3 relative flex justify-between">
         <div className="flex items-center md:gap-x-12">
           <Link href="/" aria-label="Home">
             <Image
-              src="/logo.png"
+              src={logo ? logo.url : "/logo.png"}
               alt="BBM"
-              width={593}
-              height={327}
+              width={logo ? logo.width : 593}
+              height={logo ? logo.height : 327}
               classnames={clsx(
-                "object-contain max-w-20",
-                sticky ? "w-18" : "w-28",
+                "object-contain",
+                sticky
+                  ? process.env.NEXT_PUBLIC_SITE === "bouwwerkenGv"
+                    ? "w-18"
+                    : "w-40"
+                  : process.env.NEXT_PUBLIC_SITE === "bouwwerkenGv"
+                    ? "w-28"
+                    : "w-40",
               )}
             />
           </Link>

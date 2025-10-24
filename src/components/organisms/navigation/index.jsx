@@ -1,5 +1,6 @@
 import { NavigationClient } from "./navigation";
 import { fetchData } from "@/utils/fetchData";
+import { imageQuery } from "@/queries/components/image.query";
 
 async function getData() {
   return fetchData(`
@@ -14,6 +15,12 @@ async function getData() {
             }
           }
           lang
+        }
+      }
+      
+      companyData: globalSet(site: "${process.env.NEXT_PUBLIC_SITE}", handle: "companyData") {
+        ... on companyData_GlobalSet {
+          navigationLogo ${imageQuery}
         }
       }
       
@@ -42,12 +49,13 @@ async function getData() {
 }
 
 export async function Navigation() {
-  const { topbar, nav } = await getData();
+  const { topbar, companyData, nav } = await getData();
 
   return (
     <NavigationClient
       nav={nav.navigationitems}
       topbar={topbar.navigationitems}
+      companyData={companyData}
       extraNav={[]}
     />
   );
