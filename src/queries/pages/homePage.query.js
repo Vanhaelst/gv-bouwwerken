@@ -31,6 +31,7 @@ export const homeQuery = () => `
           uri
           heading
           image: featuredImage ${imageQuery}
+          sold
         }
       }
       

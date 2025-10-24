@@ -35,16 +35,6 @@ const buttonsBouwwerken = [
     cta: "Renovatie",
     value: SERVICES.renovatie,
   },
-  {
-    id: 5,
-    cta: "Te koop",
-    value: SERVICES.renovatie,
-  },
-  {
-    id: 6,
-    cta: "Verkocht",
-    value: SERVICES.renovatie,
-  },
 ];
 
 const buttonsInvest = [

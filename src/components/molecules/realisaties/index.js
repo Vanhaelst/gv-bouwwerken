@@ -67,7 +67,26 @@ export const Realisation = ({ title, realisations = [] }) => {
         </Text>
 
         <Slider {...settings}>
-          {realisations.map(({ id, heading, image, uri }) => {
+          {realisations.map(({ id, heading, image, uri, sold }) => {
+            if (sold) {
+              return (
+                <div
+                  className={clsx("w-full mx-1 aspect-square overflow-hidden")}
+                >
+                  <Image
+                    key={id}
+                    src={image[0].url}
+                    width={image[0].width}
+                    height={image[0].height}
+                    alt={image[0].alt || heading}
+                    classnames={clsx(
+                      "grayscale pointer-events-none",
+                      "object-cover w-full h-full transition-all duration-700 hover:scale-105",
+                    )}
+                  />
+                </div>
+              );
+            }
             return (
               <div
                 className={clsx("w-full mx-1 aspect-square overflow-hidden")}
@@ -82,7 +101,7 @@ export const Realisation = ({ title, realisations = [] }) => {
                     classnames={clsx(
                       "object-cover w-full h-full transition-all duration-700 hover:scale-105",
                     )}
-                  />{" "}
+                  />
                 </Link>
               </div>
             );

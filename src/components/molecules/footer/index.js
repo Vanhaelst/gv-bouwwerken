@@ -89,7 +89,6 @@ export default async function Footer() {
   ];
   const hasSocials = social.find((social) => social.active);
 
-  console.log(companyData);
   return (
     <footer className="">
       <div

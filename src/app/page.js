@@ -16,7 +16,12 @@ export default async function Home() {
     <main>
       <Hero {...hero[0]} />
       <Content reversed {...intro[0]} />
-      <Realisation {...realisation[0]} realisations={realisations} />
+      <Realisation
+        {...realisation[0]}
+        realisations={realisations.sort(
+          (firstItem, secondItem) => firstItem.sold - secondItem.sold,
+        )}
+      />
     </main>
   );
 }

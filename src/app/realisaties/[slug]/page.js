@@ -153,55 +153,57 @@ export default async function Realisation({ params }) {
         <ContactForm />
       </Container>
 
-      <Container className="grid md:grid-cols-2 gap-4 mb-10" id="pagination">
-        {prev ? (
-          <Link href={prev.slug} className={next ? "" : "col-span-2"}>
-            <div
-              className={clsx(
-                next ? "aspect-video" : "aspect-[32/9]",
-                "group cursor-pointer relative before:transition-all duration-300",
-                `flex items-center justify-start p-4 bg-cover bg-center w-full`,
-                "before:content-[''] before:absolute before:inset-0 before:block before:bg-black/50 hover:before:bg-black/40 before:z-[5]",
-              )}
-              style={{
-                backgroundImage: `url(${prev.image[0].url || "/hero.png"})`,
-              }}
-            >
-              <Text classnames="flex z-10 text-white">
-                <ChevronLeftIcon
-                  aria-hidden="true"
-                  className={`size-5 mr-4 ml-2 group-hover:ml-0 transition-all`}
-                />
-                Vorige project
-              </Text>
-            </div>
-          </Link>
-        ) : null}
+      {process.env.NEXT_PUBLIC_SITE === "bouwwerkenGv" ? (
+        <Container className="grid md:grid-cols-2 gap-4 mb-10" id="pagination">
+          {prev ? (
+            <Link href={prev.slug} className={next ? "" : "col-span-2"}>
+              <div
+                className={clsx(
+                  next ? "aspect-video" : "aspect-[32/9]",
+                  "group cursor-pointer relative before:transition-all duration-300",
+                  `flex items-center justify-start p-4 bg-cover bg-center w-full`,
+                  "before:content-[''] before:absolute before:inset-0 before:block before:bg-black/50 hover:before:bg-black/40 before:z-[5]",
+                )}
+                style={{
+                  backgroundImage: `url(${prev.image[0].url || "/hero.png"})`,
+                }}
+              >
+                <Text classnames="flex z-10 text-white">
+                  <ChevronLeftIcon
+                    aria-hidden="true"
+                    className={`size-5 mr-4 ml-2 group-hover:ml-0 transition-all`}
+                  />
+                  Vorige project
+                </Text>
+              </div>
+            </Link>
+          ) : null}
 
-        {next ? (
-          <Link href={next.slug} className={prev ? "" : "col-span-2"}>
-            <div
-              className={clsx(
-                prev ? "aspect-video" : "aspect-[32/9]",
-                "group cursor-pointer relative before:transition-all duration-300",
-                `flex items-center justify-end p-4 bg-cover bg-center w-full`,
-                "before:content-[''] before:absolute before:inset-0 before:block before:bg-black/50 hover:before:bg-black/40 before:z-[5]",
-              )}
-              style={{
-                backgroundImage: `url(${next.image[0].url || "/hero.png"})`,
-              }}
-            >
-              <Text classnames="flex z-10 text-white">
-                Volgende project
-                <ChevronRightIcon
-                  aria-hidden="true"
-                  className={`size-5 ml-4 mr-2 group-hover:mr-0 transition-all`}
-                />
-              </Text>
-            </div>
-          </Link>
-        ) : null}
-      </Container>
+          {next ? (
+            <Link href={next.slug} className={prev ? "" : "col-span-2"}>
+              <div
+                className={clsx(
+                  prev ? "aspect-video" : "aspect-[32/9]",
+                  "group cursor-pointer relative before:transition-all duration-300",
+                  `flex items-center justify-end p-4 bg-cover bg-center w-full`,
+                  "before:content-[''] before:absolute before:inset-0 before:block before:bg-black/50 hover:before:bg-black/40 before:z-[5]",
+                )}
+                style={{
+                  backgroundImage: `url(${next.image[0].url || "/hero.png"})`,
+                }}
+              >
+                <Text classnames="flex z-10 text-white">
+                  Volgende project
+                  <ChevronRightIcon
+                    aria-hidden="true"
+                    className={`size-5 ml-4 mr-2 group-hover:mr-0 transition-all`}
+                  />
+                </Text>
+              </div>
+            </Link>
+          ) : null}
+        </Container>
+      ) : null}
     </main>
   );
 }
