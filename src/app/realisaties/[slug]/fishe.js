@@ -49,6 +49,29 @@ export const Fishe = ({ title, fishe }) => {
                 className="w-full"
                 defaultValue=""
               >
+                {fishe?.rooms.length ? (
+                  <AccordionItem value="item-1">
+                    <AccordionTrigger>
+                      <Text as="h2" level="xl">
+                        Kamers
+                      </Text>
+                    </AccordionTrigger>
+                    <AccordionContent className="flex flex-col gap-4 text-balance">
+                      <div className="mt-6 border-t border-gray-100 ">
+                        <dl className="divide-y divide-gray-100 ">
+                          {fishe?.rooms.map(({ title, description }) => (
+                            <Item
+                              key={title}
+                              title={title}
+                              description={description}
+                            />
+                          ))}
+                        </dl>
+                      </div>
+                    </AccordionContent>
+                  </AccordionItem>
+                ) : null}
+
                 <AccordionItem value="item-1">
                   <AccordionTrigger>
                     <Text as="h2" level="xl">

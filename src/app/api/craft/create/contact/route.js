@@ -12,8 +12,6 @@ const graphQLClient = new GraphQLClient(craftUrl, {
 export async function POST(request, response) {
   const body = await request.json();
 
-  console.log(body);
-
   const mutation = gql`
     mutation saveEntry(
       $title: String!
@@ -22,6 +20,7 @@ export async function POST(request, response) {
       $message: String!
       $project: String!
       $id: String!
+      $slug: String!
     ) {
       save_contactForm_contactForm_Entry(
         title: $title
@@ -29,7 +28,8 @@ export async function POST(request, response) {
         mail: $mail
         message: $message
         project: $project
-        id: $id
+        originId: $id
+        originSlug: $slug
 
         siteId: ${Number(process.env.CRAFT_SITE_ID)}
         authorId: ${Number(process.env.CRAFT_AUTHOR_ID)}

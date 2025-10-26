@@ -97,12 +97,21 @@ export default async function Realisation({ params }) {
               </Text>
 
               <RichText
-                text={content[0].description}
+                text={content[0].intro}
                 level="md"
                 as="p"
                 classnames={clsx("mb-6")}
               />
             </div>
+          </div>
+
+          <div className="py-10 md:col-span-10 md:col-start-2 flex justify-center grid">
+            <RichText
+              text={content[0].description}
+              level="md"
+              as="p"
+              classnames={clsx("mb-6")}
+            />
           </div>
         </Container>
 

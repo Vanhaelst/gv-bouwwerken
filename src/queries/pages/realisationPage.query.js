@@ -12,6 +12,7 @@ export const realisationQuery = ({ slug }) => `
           id
           url
           title: contentHeading
+          intro: introDescription
           description: contentDescription
           image: featuredImage ${imageQuery}
           price
@@ -22,6 +23,13 @@ export const realisationQuery = ({ slug }) => `
       fishe: realisationsEntries(site: "${process.env.NEXT_PUBLIC_SITE}", slug: "${slug}") {
         ... on realisation_Entry {
           fishe
+          
+          rooms: ficheItems {
+            ... on ficheItem_Entry {
+              title
+              description
+            }
+          }
           
           bathroom
           all

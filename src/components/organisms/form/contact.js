@@ -44,15 +44,15 @@ export const ContactForm = ({ project, slug, id }) => {
         title: data.name,
         ...data,
       });
-
+      /*
       await sendMail({
         data,
         templateId: 1,
       });
-
+*/
       setShowSuccess(true);
       setIsSending(false);
-      // reset();
+      reset();
     } catch (error) {
       console.error(error);
       setIsSending(false);
