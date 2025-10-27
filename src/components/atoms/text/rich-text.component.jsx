@@ -71,7 +71,7 @@ const RichText = ({ text, classnames, level }) => {
 
       if (name === "ul") {
         return (
-          <ul role="list" className={`${classnames} mt-8 space-y-3 list-disc`}>
+          <ul role="list" className={`${classnames} space-y-3 list-disc`}>
             {domToReact(children, options)}
           </ul>
         );
@@ -117,6 +117,7 @@ const RichText = ({ text, classnames, level }) => {
       if (name === "img") {
         return (
           <img
+            alt=""
             className="w-full rounded-2xl"
             {...attribs}
             style={{ aspectRatio: `${attribs.width}/${attribs.height}` }}

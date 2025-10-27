@@ -9,12 +9,12 @@ import { Hero } from "@/components/organisms/hero";
 import { Container } from "@/components/atoms/container";
 import { Text } from "@/components/atoms/text/text.component";
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/outline";
-import { RealisationLightbox } from "@/components/molecules/realisaties/lightbox";
 import RichText from "@/components/atoms/text/rich-text.component";
 import { Fishe } from "@/app/realisaties/[slug]/fishe";
 import { ContactForm } from "@/components/organisms/form/contact";
 import { formatCurrency } from "@/utils/formatPrice";
 import CallToAction from "@/components/molecules/cta";
+import RealisationClient from "@/app/realisaties/[slug]/client";
 
 async function getData({ slug }) {
   return fetchData(realisationQuery({ slug }));
@@ -74,7 +74,7 @@ export default async function Realisation({ params }) {
             />
           </div>
 
-          <div className="bg-white md:col-span-6 md:col-start-6 flex justify-center md:-mt-[40%]">
+          <div className="bg-white md:col-span-6 md:col-start-6 flex justify-center md:-mt-[50%]">
             <div className="p-8 w-full">
               {content[0].price ? (
                 <div className="bg-primary-500 mb-6 p-2 w-fit flex items-center justify-center">
@@ -115,7 +115,7 @@ export default async function Realisation({ params }) {
           </div>
         </Container>
 
-        <RealisationLightbox lightbox={lightbox} />
+        <RealisationClient lightbox={lightbox} />
       </section>
 
       {fishe?.[0]?.fishe ? (

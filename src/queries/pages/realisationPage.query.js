@@ -24,6 +24,19 @@ export const realisationQuery = ({ slug }) => `
         ... on realisation_Entry {
           fishe
           
+          accordion {
+            ... on accordionItem_Entry {
+              id
+              title
+              items: ficheItems {
+                ... on ficheItem_Entry {
+                  title
+                  description
+                }
+              }
+            }
+          }
+      
           rooms: ficheItems {
             ... on ficheItem_Entry {
               title

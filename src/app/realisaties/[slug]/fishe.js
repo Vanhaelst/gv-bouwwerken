@@ -43,6 +43,38 @@ export const Fishe = ({ title, fishe }) => {
                 </p>
               </div>
 
+              {fishe?.accordion.length ? (
+                <Accordion
+                  type="single"
+                  collapsible
+                  className="w-full"
+                  defaultValue=""
+                >
+                  {fishe?.accordion.map(({ id, title, items }) => (
+                    <AccordionItem value={id}>
+                      <AccordionTrigger>
+                        <Text as="h2" level="xl">
+                          {title}
+                        </Text>
+                      </AccordionTrigger>
+                      <AccordionContent className="flex flex-col gap-4 text-balance">
+                        <div className="mb-6 border-t border-gray-100 ">
+                          <dl className="divide-y divide-gray-100 ">
+                            {items.map(({ title, description }) => (
+                              <Item
+                                key={title}
+                                title={title}
+                                description={description}
+                              />
+                            ))}
+                          </dl>
+                        </div>
+                      </AccordionContent>
+                    </AccordionItem>
+                  ))}
+                </Accordion>
+              ) : null}
+
               <Accordion
                 type="single"
                 collapsible
