@@ -15,9 +15,43 @@ import { ContactForm } from "@/components/organisms/form/contact";
 import { formatCurrency } from "@/utils/formatPrice";
 import CallToAction from "@/components/molecules/cta";
 import RealisationClient from "@/app/realisaties/[slug]/client";
+import { imageQuery } from "@/queries/components/image.query";
 
 async function getData({ slug }) {
   return fetchData(realisationQuery({ slug }));
+}
+
+export async function generateMetadata({ params }) {
+  const { content } = await fetchData(`
+        query MyQuery {
+          content: realisationsEntries(site: "${process.env.NEXT_PUBLIC_SITE}", slug: "${params.slug}") {
+          ... on realisation_Entry {
+            id
+            url
+            title: contentHeading
+            intro: introDescription
+            description: contentDescription
+            image: featuredImage ${imageQuery}
+          }
+        }
+      }`);
+
+  const title =
+    process.env.NEXT_PUBLIC_SITE === "gvInvest"
+      ? "GV Invest | Te koop |"
+      : "Bouwwerken GV | Realisaties |";
+  return {
+    title: `${title} ${content?.[0]?.title}`,
+    description: content?.[0]?.description,
+    images: content?.[0]?.image?.[0]?.image,
+
+    openGraph: {
+      title: content?.[0]?.title,
+      description: content?.[0]?.description,
+      url: content?.[0]?.url,
+      images: content?.[0]?.image?.[0]?.image,
+    },
+  };
 }
 
 export default async function Realisation({ params }) {

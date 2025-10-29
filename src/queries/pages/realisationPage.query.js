@@ -30,49 +30,13 @@ export const realisationQuery = ({ slug }) => `
               title
               items: ficheItems {
                 ... on ficheItem_Entry {
+                  id
                   title
                   description
                 }
               }
             }
           }
-      
-          rooms: ficheItems {
-            ... on ficheItem_Entry {
-              title
-              description
-            }
-          }
-          
-          bathroom
-          all
-          heating,
-          heatingMaterial
-          heatingRadiator
-          hotWater
-          utilities
-          carpentry
-          isolation
-          condition
-          
-          buildyear
-          regionalPlan
-          cadastralData
-          urbanPlanningInformation
-          cadastralIncome
-          oLevel
-          pScore
-          gScore
-          
-          environment
-          plotOrientation
-          facadeOrientation
-          
-          habitableArea
-          streetWidth
-          buildType
-          
-          parking
           
           attachments {
             id
