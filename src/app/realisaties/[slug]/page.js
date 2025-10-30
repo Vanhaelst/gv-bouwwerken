@@ -22,9 +22,11 @@ async function getData({ slug }) {
 }
 
 export async function generateMetadata({ params }) {
+  const { slug } = await params;
+
   const { content } = await fetchData(`
         query MyQuery {
-          content: realisationsEntries(site: "${process.env.NEXT_PUBLIC_SITE}", slug: "${params.slug}") {
+          content: realisationsEntries(site: "${process.env.NEXT_PUBLIC_SITE}", slug: "${slug}") {
           ... on realisation_Entry {
             id
             url
