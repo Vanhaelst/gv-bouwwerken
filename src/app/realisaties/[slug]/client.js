@@ -13,7 +13,7 @@ export default function RealisationClient({ lightbox }) {
 
   return (
     <RealisationLightbox
-      lightbox={images}
+      lightbox={images.map((image) => ({ ...image, src: image.url }))}
       setAmount={setAmount}
       showMore={amount < maxLength}
     />

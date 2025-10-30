@@ -56,7 +56,7 @@ export const RealisationLightbox = ({ lightbox, setAmount, showMore }) => {
                     >
                       <Image
                         key={image?.id}
-                        src={image?.url}
+                        src={image?.src}
                         width={image?.width}
                         height={image?.height}
                         alt={image?.alt || ""}
