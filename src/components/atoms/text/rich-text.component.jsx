@@ -65,7 +65,7 @@ const RichText = ({ text, classnames, level }) => {
 
       if (name === "strong") {
         return (
-          <span className="font-bold">{domToReact(children, options)}</span>
+          <span className="font-semibold">{domToReact(children, options)}</span>
         );
       }
 
