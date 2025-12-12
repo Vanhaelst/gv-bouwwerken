@@ -19,7 +19,7 @@
     "graphql-request": "^7.1.2",
     "html-react-parser": "^5.2.0",
     "lucide-react": "^0.545.0",
-    "next": "16.0.7",
+    "next": "16.0.10",
     "prettier": "^3.5.3",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
