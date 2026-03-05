@@ -1,5 +1,4 @@
 import React from "react";
-import Link from "next/link";
 import parse, { attributesToProps, domToReact } from "html-react-parser";
 import { Text } from "./text.component";
 
@@ -9,7 +8,12 @@ const RichText = ({ text, classnames, level }) => {
       if (name === "h1") {
         const props = attributesToProps(attribs);
         return (
-          <Text {...props} level="h1" classnames={classnames}>
+          <Text
+            {...props}
+            as="h1"
+            level="4xl"
+            classnames={`${classnames} mb-2`}
+          >
             {domToReact(children, options)}
           </Text>
         );
@@ -17,7 +21,12 @@ const RichText = ({ text, classnames, level }) => {
       if (name === "h2") {
         const props = attributesToProps(attribs);
         return (
-          <Text {...props} level="h2" classnames={classnames}>
+          <Text
+            {...props}
+            as="h2"
+            level="3xl"
+            classnames={`${classnames} mb-2`}
+          >
             {domToReact(children, options)}
           </Text>
         );
@@ -25,7 +34,12 @@ const RichText = ({ text, classnames, level }) => {
       if (name === "h3") {
         const props = attributesToProps(attribs);
         return (
-          <Text {...props} level="h3" classnames={classnames}>
+          <Text
+            {...props}
+            as="h3"
+            level="2xl"
+            classnames={`${classnames} mb-2`}
+          >
             {domToReact(children, options)}
           </Text>
         );
@@ -33,7 +47,7 @@ const RichText = ({ text, classnames, level }) => {
       if (name === "h4") {
         const props = attributesToProps(attribs);
         return (
-          <Text {...props} level="h4" classnames={classnames}>
+          <Text {...props} as="h4" level="xl" classnames={`${classnames} mb-2`}>
             {domToReact(children, options)}
           </Text>
         );
@@ -41,7 +55,7 @@ const RichText = ({ text, classnames, level }) => {
       if (name === "h5") {
         const props = attributesToProps(attribs);
         return (
-          <Text {...props} level="h5" classnames={classnames}>
+          <Text {...props} as="h5" level="l" classnames={`${classnames} mb-2`}>
             {domToReact(children, options)}
           </Text>
         );
@@ -49,7 +63,7 @@ const RichText = ({ text, classnames, level }) => {
       if (name === "h6") {
         const props = attributesToProps(attribs);
         return (
-          <Text {...props} level="h6" classnames={`${classnames} text-xl`}>
+          <Text {...props} as="h6" level="md" classnames={`${classnames} mb-2`}>
             {domToReact(children, options)}
           </Text>
         );
@@ -57,7 +71,7 @@ const RichText = ({ text, classnames, level }) => {
       if (name === "p") {
         const props = attributesToProps(attribs);
         return (
-          <Text {...props} level={level} classnames={`${classnames}`}>
+          <Text {...props} level={level} classnames={`${classnames} mb-2`}>
             {domToReact(children, options)}
           </Text>
         );
@@ -65,13 +79,13 @@ const RichText = ({ text, classnames, level }) => {
 
       if (name === "strong") {
         return (
-          <span className="font-semibold">{domToReact(children, options)}</span>
+          <span className="font-bold">{domToReact(children, options)}</span>
         );
       }
 
       if (name === "ul") {
         return (
-          <ul role="list" className={`${classnames} space-y-3 list-disc`}>
+          <ul role="list" className={`${classnames} mt-8 space-y-3 list-disc`}>
             {domToReact(children, options)}
           </ul>
         );
@@ -98,38 +112,15 @@ const RichText = ({ text, classnames, level }) => {
 
       if (name === "a") {
         return (
-          <Link href={attribs.href} target="_blank">
-            <span className="relative underline decoration-accent-500 break-all">
+          <a
+            href={attribs.href}
+            target={attribs?.target ? attribs.target : "_self"}
+            className=" cursor-pointer"
+          >
+            <span className="relative underline decoration-accent-500">
               {domToReact(children, options)}
             </span>
-          </Link>
-        );
-      }
-
-      if (name === "blockquote") {
-        return (
-          <blockquote className="p-4 my-4 border-s-4 border-primary-500 italic font-bold leading-relaxed text-gray-900">
-            {domToReact(children, options)}
-          </blockquote>
-        );
-      }
-
-      if (name === "img") {
-        return (
-          <img
-            alt=""
-            className="w-full rounded-2xl"
-            {...attribs}
-            style={{ aspectRatio: `${attribs.width}/${attribs.height}` }}
-          />
-        );
-      }
-
-      if (name === "figure") {
-        return (
-          <figure className="image lg:w-[120%] lg:-left-[10%]">
-            {domToReact(children, options)}
-          </figure>
+          </a>
         );
       }
     },
