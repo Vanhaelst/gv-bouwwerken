@@ -209,6 +209,17 @@ export default async function Footer() {
                 Privacybeleid
               </a>{" "}
               |{" "}
+              {process.env.NEXT_PUBLIC_SITE === "bouwwerkenGv" ? (
+                <>
+                  <a
+                    href="https://gv.pluxit.be/web/assets/Algemene-Voorwaarden.pdf"
+                    className="cursor-pointer hover:underline"
+                  >
+                    Algemene voorwaarden
+                  </a>{" "}
+                  |{" "}
+                </>
+              ) : null}
               <a
                 href="https://publiplus.be/"
                 target="_blank"
