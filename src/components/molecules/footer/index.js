@@ -212,6 +212,7 @@ export default async function Footer() {
               {process.env.NEXT_PUBLIC_SITE === "bouwwerkenGv" ? (
                 <>
                   <a
+                    target="_blank"
                     href="https://gv.pluxit.be/web/assets/Algemene-Voorwaarden.pdf"
                     className="cursor-pointer hover:underline"
                   >
