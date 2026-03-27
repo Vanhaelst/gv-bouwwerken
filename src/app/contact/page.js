@@ -8,9 +8,32 @@ import { Text } from "@/components/atoms/text/text.component";
 import { Container } from "@/components/atoms/container";
 import { ContactForm } from "@/components/organisms/form/contact";
 import Image from "@/utils/Image";
+import { seoQuery } from "@/queries/channels/seo.query";
+import { metadata } from "@/app/layout";
 
 async function getData() {
   return fetchData(contactQuery());
+}
+
+export async function generateMetadata() {
+  const { seo } = await fetchData(
+    seoQuery({ page: "contactEntry", entry: "contact_Entry" }),
+  );
+  const { seoTitle, seoDescription, seoKeywords, seoImage } = seo.seo ?? {};
+
+  return {
+    title: seoTitle || metadata.title,
+    description: seoDescription || metadata.description,
+    keywords: seoKeywords || metadata.keywords,
+    images: seoImage?.[0]?.url || metadata.image,
+
+    openGraph: {
+      title: seoTitle || metadata.title,
+      description: seoDescription || metadata.description,
+      url: `https://www.prikentikmechelen.be/`,
+      images: seoImage?.[0]?.url || "",
+    },
+  };
 }
 
 export default async function Contact() {

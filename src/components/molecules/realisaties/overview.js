@@ -1,3 +1,5 @@
+"use client";
+
 import { motion, AnimatePresence } from "framer-motion";
 import { Container } from "@/components/atoms/container";
 import clsx from "clsx";

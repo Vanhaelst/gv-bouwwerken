@@ -28,30 +28,31 @@ export async function generateMetadata({ params }) {
         query MyQuery {
           content: realisationsEntries(site: "${process.env.NEXT_PUBLIC_SITE}", slug: "${slug}") {
           ... on realisation_Entry {
-            id
-            url
-            title: contentHeading
-            intro: introDescription
-            description: contentDescription
-            image: featuredImage ${imageQuery}
+            seo {
+              title: seoTitle
+              description: seoDescription
+              keywords: seoKeywords
+              image: seoImage { url }
+            }
           }
         }
       }`);
 
+  console.log(content);
   const title =
     process.env.NEXT_PUBLIC_SITE === "gvInvest"
       ? "GV Invest | Te koop |"
       : "Bouwwerken GV | Realisaties |";
   return {
-    title: `${title} ${content?.[0]?.title}`,
-    description: content?.[0]?.description,
-    images: content?.[0]?.image?.[0]?.image,
+    title: `${title} ${content?.[0]?.seo?.title}`,
+    description: content?.[0]?.seo?.description,
+    images: content?.[0]?.seo?.image?.[0]?.url,
 
     openGraph: {
-      title: content?.[0]?.title,
-      description: content?.[0]?.description,
-      url: content?.[0]?.url,
-      images: content?.[0]?.image?.[0]?.image,
+      title: content?.[0]?.seo?.title,
+      description: content?.[0]?.seo?.description,
+      url: content?.[0]?.seo?.url,
+      images: content?.[0]?.seo?.image?.[0]?.url,
     },
   };
 }

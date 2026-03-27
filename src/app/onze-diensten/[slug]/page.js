@@ -10,9 +10,47 @@ import RichText from "@/components/atoms/text/rich-text.component";
 import { Button } from "@/components/atoms/button";
 
 import { SERVICES } from "@/enums/services";
+import { imageQuery } from "@/queries/components/image.query";
 
 async function getData({ slug, service }) {
   return fetchData(serviceQuery({ slug, service }));
+}
+
+export async function generateMetadata({ params }) {
+  const { slug } = await params;
+
+  const { services } = await fetchData(`
+        query MyQuery {
+          services: servicesEntries(site: "${process.env.NEXT_PUBLIC_SITE}", slug: "${slug}") {
+          ... on service_Entry {
+            seo {
+              title: seoTitle
+              description: seoDescription
+              keywords: seoKeywords
+              image: seoImage { url }
+            }
+          }
+        }
+      }`);
+
+  const service = services?.[0]?.seo;
+  const title =
+    process.env.NEXT_PUBLIC_SITE === "gvInvest"
+      ? "GV Invest | Diensten |"
+      : "Bouwwerken GV | Diensten |";
+  return {
+    title: `${title} ${service?.title}`,
+    description: service?.description,
+    keywords: service?.keywords,
+    images: service?.image?.[0]?.url,
+
+    openGraph: {
+      title: service?.title,
+      description: service?.description,
+      url: service?.url,
+      images: service?.image?.[0]?.url,
+    },
+  };
 }
 
 export default async function Service({ params }) {
