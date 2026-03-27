@@ -6,6 +6,7 @@ import { Navigation } from "@/components/organisms/navigation";
 import Footer from "@/components/molecules/footer";
 import { Cookiebot } from "@/components/organisms/Cookiebot";
 import Head from "next/head";
+import Script from "next/script";
 
 const redHatText = Red_Hat_Text({
   variable: "--font-red_hat_text",
